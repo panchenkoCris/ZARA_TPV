@@ -14,17 +14,24 @@
     </string>
     <string name="button_qrscanner_code">Scanner</string>
     <string name="button_dialog_code">Keyboard</string>
-
+    <!-- Elementos del recyclerView -->
     <string name="textView_title_name_clothe">Name: </string>
     <string name="textView_title_size_clothe">Size: </string>
     <string name="textView_title_price_clothe">Price: </string>
     <string name="textView_title_color_clothe">Color: </string>
-
-    <string name="textView_pay_clothes">Pay the shop</string>
+    <!-- Elementos de la pantalla 'ResumeShopWindow -->
     <string name="textView_title_resume">Shop list</string>
+    <string name="textView_pay_clothes">Pay the purchase</string>
     <string name="button_delete_clothe">Delete</string>
     <string name="button_modify_clothe">Modify</string>
     <string name="button_insert_barcode">Insert code</string>
     <string name="editText_num_barcode">Barcode</string>
     <string name="textView_title_dialog_code">Insert numbers from barcode</string>
+    <string name="textView_title_view_clothe">Visualise garment from cart</string>
+    <!-- Elementos del dialog 'custom_dialog_sign_in -->
+    <string name="textView_title_sign_in">Screen login</string>
+    <string name="editText_username">Insert your identification</string>
+    <string name="editText_password">Insert your password</string>
+    <string name="textView_title_username">User: </string>
+    <string name="textView_title_password">Password: </string>
 </resources>

@@ -1,6 +1,5 @@
 package com.example.zara_tpv.windows;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -15,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -61,7 +59,7 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
 
-        Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.menu_icon);
+        Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.icon_menu);
         toolbar.setOverflowIcon(drawable);
         setSupportActionBar(toolbar);
 
