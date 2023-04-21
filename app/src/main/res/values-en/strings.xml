@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">
+        ZARA
+    </string>
+    <string name="shop_name">
+        ZARA
+    </string>
+    <string name="button_first_window">
+        Start
+    </string>
+    <string name="textView_choose_code_option">
+        Choose any of the following options in order to read the barcode
+    </string>
+    <string name="button_qrscanner_code">Scanner</string>
+    <string name="button_dialog_code">Keyboard</string>
+
+    <string name="textView_title_name_clothe">Name: </string>
+    <string name="textView_title_size_clothe">Size: </string>
+    <string name="textView_title_price_clothe">Price: </string>
+    <string name="textView_title_color_clothe">Color: </string>
+
+    <string name="textView_pay_clothes">Pay the shop</string>
+    <string name="textView_title_resume">Shop list</string>
+    <string name="button_delete_clothe">Delete</string>
+    <string name="button_modify_clothe">Modify</string>
+    <string name="button_insert_barcode">Insert code</string>
+    <string name="editText_num_barcode">Barcode</string>
+    <string name="textView_title_dialog_code">Insert numbers from barcode</string>
+</resources>
