@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="50dp">
+
+    <TextView
+        android:id="@+id/textView_title_dialog_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Inserte los número del código de barras"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/image_barcode"
+        android:layout_width="match_parent"
+        android:layout_height="129dp"
+        app:srcCompat="@drawable/barcode_img" />
+
+    <EditText
+        android:id="@+id/editText_num_barcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:ems="10"
+        android:hint="Código de barras"
+        android:inputType="textPersonName"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/button_insert_barcode"
+        android:layout_width="480dp"
+        android:layout_height="53dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginRight="200dp"
+        android:backgroundTint="#E1DFDF"
+        android:text="Insertar código"
+        android:textColor="#000000" />
+
+</LinearLayout>

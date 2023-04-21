@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/border"
+    android:padding="5dip"
+    tools:context=".windows.MainWindow">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_readBarcode"
+        android:layout_width="288dp"
+        android:layout_height="617dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/border"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.976"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textView_choose_code_option"
+            android:textAlignment="gravity"
+            android:layout_width="224dp"
+            android:layout_height="200dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="402dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="@string/text_choose_code_option"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/button_openDialogCode"
+            android:layout_width="215dp"
+            android:layout_height="61dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="456dp"
+            android:layout_marginEnd="34dp"
+            android:layout_marginBottom="99dp"
+            android:backgroundTint="#E1DFDF"
+            android:drawableLeft="@drawable/keyboard"
+            android:fontFamily="sans-serif-thin"
+            android:text="@string/button_dialog_code"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_openScannerCode"
+            android:layout_width="217dp"
+            android:layout_height="61dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="527dp"
+            android:layout_marginEnd="34dp"
+            android:layout_marginBottom="29dp"
+            android:backgroundTint="#E1DFDF"
+            android:drawableLeft="@drawable/qr_code_scanner"
+            android:fontFamily="sans-serif-thin"
+            android:text="@string/button_qrscanner_code"
+            android:textColor="#101010"
+            android:textStyle="bold" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/gifImageView"
+            android:layout_width="276dp"
+            android:layout_height="206dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="224dp"
+            android:layout_marginEnd="7dp"
+            android:padding="10dp"
+            android:src="@drawable/barcode" />
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="58dp"
+        android:gravity="center_vertical|start"
+        android:backgroundTint="#E1DFDF"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/AppTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout_clothes"
+        android:layout_width="882dp"
+        android:layout_height="617dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/border"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/relativeLayout_readBarcode"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.216">
+
+        <TextView
+            android:id="@+id/textView_title_shopping"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="Resumen compra"
+            android:padding="10dp"
+            android:textSize="34sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_clothes"
+            android:layout_width="match_parent"
+            android:layout_height="359dp"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/relativeLayout_readBarcode"
+            app:layout_constraintHorizontal_bias="0.185"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.567" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
