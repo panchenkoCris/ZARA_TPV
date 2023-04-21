@@ -1,5 +1,6 @@
 package com.example.zara_tpv.windows;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -14,8 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zara_tpv.R;
@@ -26,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainWindow extends AppCompatActivity implements View.OnClickListener {
+public class ResumeShopWindow extends AppCompatActivity implements View.OnClickListener {
     private List<ListClothes> clothes;
     private ListClothesAdapter adapter;
     private RecyclerView recyclerView;
@@ -34,16 +37,26 @@ public class MainWindow extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_window);
+        setContentView(R.layout.resume_shop_window);
 
         clothes = new ArrayList<>();
         clothes.add(new ListClothes("blusa", "38", "2.90"));
+        clothes.add(new ListClothes("blusa", "38", "2.90"));
+        clothes.add(new ListClothes("blusa", "38", "2.90"));
+        clothes.add(new ListClothes("blusa", "38", "2.90"));
+        clothes.add(new ListClothes("blusa", "38", "2.90"));
+        clothes.add(new ListClothes("blusa", "38", "2.90"));
+        clothes.add(new ListClothes("blusa", "38", "2.90"));
 
-        adapter = new ListClothesAdapter(clothes, this);
 
         recyclerView = findViewById(R.id.recyclerView_clothes);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(new ListClothesAdapter(clothes, new ListClothesAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(ListClothes clothe) {
+                openDialogClothe();
+            }
+        }));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
@@ -89,7 +102,7 @@ public class MainWindow extends AppCompatActivity implements View.OnClickListene
         Button b = (Button) v;
         switch (b.getId()) {
             case R.id.button_openDialogCode:
-                openDialog();
+                openDialogCode();
                 break;
             case R.id.button_openScannerCode:
                 startActivity(new Intent(this, ScannerWindow.class));
@@ -97,8 +110,8 @@ public class MainWindow extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    private void openDialog() {
-        final Dialog dialog = new Dialog(MainWindow.this);
+    private void openDialogCode() {
+        final Dialog dialog = new Dialog(ResumeShopWindow.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.custom_dialog_code);
@@ -107,6 +120,22 @@ public class MainWindow extends AppCompatActivity implements View.OnClickListene
         final Button buttonInsertBarcode = dialog.findViewById(R.id.button_insert_barcode);
 
         buttonInsertBarcode.setOnClickListener((v) -> {
+            //int barcode = Integer.parseInt(numBarcode.getText().toString());
+            dialog.dismiss();
+        });
+        dialog.show();
+    }
+
+    private void openDialogClothe() {
+        final Dialog dialog = new Dialog(ResumeShopWindow.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.custom_dialog_clothe);
+
+        final TextView textName = dialog.findViewById(R.id.textView_name_clothe);
+        final Button buttonModifyClothe = dialog.findViewById(R.id.button_modify_clothe);
+
+        buttonModifyClothe.setOnClickListener((v) -> {
             //int barcode = Integer.parseInt(numBarcode.getText().toString());
             dialog.dismiss();
         });

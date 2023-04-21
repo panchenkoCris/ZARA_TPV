@@ -20,21 +20,24 @@
         tools:targetApi="31">
         <activity
             android:name=".windows.ScannerWindow"
-            android:exported="false">
+            android:exported="false"
+            android:configChanges="locale|orientation">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".windows.MainWindow"
-            android:exported="false">
+            android:name=".windows.ResumeShopWindow"
+            android:exported="false"
+            android:configChanges="locale|orientation">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".windows.FirstWindow"
-            android:exported="true">
+            android:exported="true"
+            android:configChanges="locale|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -21,33 +21,46 @@
 
     <TextView
         android:id="@+id/textView_shopName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="1248dp"
+        android:layout_height="413dp"
         android:fontFamily="serif"
         android:text="@string/shop_name"
+        android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="300sp"
+        android:textSize="260sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/videoView"
-        app:layout_constraintVertical_bias="0.249" />
+        app:layout_constraintVertical_bias="0.188" />
 
-    <Button
-        android:id="@+id/button_firstWindow"
-        android:layout_width="687dp"
-        android:layout_height="69dp"
-        android:backgroundTint="#E1DFDF"
-        android:fontFamily="sans-serif-thin"
-        android:onClick="launchMainActivity"
-        android:text="@string/button_first_window"
-        android:textColor="#090909"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/videoView"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_languageSpanish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="@string/shop_name"
+        app:backgroundTint="#F1E9E9"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/videoView"
+        app:layout_constraintHorizontal_bias="0.456"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_shopName"
-        app:layout_constraintVertical_bias="0.382" />
+        app:srcCompat="@drawable/flag_spain" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_languageEnglish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="@string/shop_name"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_shopName"
+        app:srcCompat="@drawable/flag_uk" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

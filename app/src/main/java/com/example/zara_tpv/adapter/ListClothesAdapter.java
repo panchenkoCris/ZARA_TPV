@@ -3,9 +3,12 @@ package com.example.zara_tpv.adapter;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,28 +22,27 @@ import java.util.List;
 
 public class ListClothesAdapter extends RecyclerView.Adapter<ListClothesAdapter.ViewHolder> {
     private List<ListClothes> data;
-    private LayoutInflater inflater;
-    private Context context;
-    private Resources res;
+    private final OnItemClickListener listener;
 
-    public ListClothesAdapter(List<ListClothes> data, Context context) {
-        this.inflater = LayoutInflater.from(context);
+    public interface OnItemClickListener {
+        void onItemClick(ListClothes item);
+    }
+
+    public ListClothesAdapter(List<ListClothes> data, OnItemClickListener listener) {
         this.data = data;
-        this.context = context;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public ListClothesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ListClothesAdapter.ViewHolder(inflater.inflate(R.layout.list_clothes, parent,false));
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_clothes, parent,false);
+        return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ListClothesAdapter.ViewHolder holder, int position) {
-        ListClothes clothe = data.get(position);
-        holder.name.setText(clothe.getName());
-        holder.size.setText(clothe.getSize());
-        holder.price.setText(clothe.getPrice());
+        holder.bind(data.get(position), listener);
     }
 
     @Override
@@ -58,6 +60,18 @@ public class ListClothesAdapter extends RecyclerView.Adapter<ListClothesAdapter.
             name = itemView.findViewById(R.id.textView_name_clothe);
             size = itemView.findViewById(R.id.textView_size_clothe);
             price = itemView.findViewById(R.id.textView_price_clothe);
+        }
+
+        public void bind(ListClothes clothe, final OnItemClickListener listener) {
+            name.setText(clothe.getName());
+            size.setText(clothe.getSize());
+            price.setText(clothe.getPrice());
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(clothe);
+                }
+            });
         }
     }
 

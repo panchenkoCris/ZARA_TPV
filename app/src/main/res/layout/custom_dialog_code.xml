@@ -10,7 +10,7 @@
         android:id="@+id/textView_title_dialog_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Inserte los número del código de barras"
+        android:text="@string/textView_title_dialog_code"
         android:textAlignment="center"
         android:textSize="20sp" />
 
@@ -27,7 +27,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:ems="10"
-        android:hint="Código de barras"
+        android:hint="@string/editText_num_barcode"
         android:inputType="textPersonName"
         android:minHeight="48dp" />
 
@@ -38,7 +38,7 @@
         android:layout_marginLeft="200dp"
         android:layout_marginRight="200dp"
         android:backgroundTint="#E1DFDF"
-        android:text="Insertar código"
+        android:text="@string/button_insert_barcode"
         android:textColor="#000000" />
 
 </LinearLayout>

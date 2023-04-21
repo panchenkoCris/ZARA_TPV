@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">
-        ZARA_TPV
+        ZARA
     </string>
     <string name="shop_name">
         ZARA
@@ -8,12 +8,22 @@
     <string name="button_first_window">
         Comenzar
     </string>
-    <string name="text_choose_code_option">
+    <string name="textView_choose_code_option">
         Escoja alguna de las siguientes opciones para leer el código de la prenda
     </string>
     <string name="button_qrscanner_code">Escáner</string>
     <string name="button_dialog_code">Teclado</string>
+
     <string name="textView_title_name_clothe">Nombre: </string>
     <string name="textView_title_size_clothe">Talla: </string>
     <string name="textView_title_price_clothe">Precio: </string>
+    <string name="textView_title_color_clothe">Color: </string>
+
+    <string name="textView_pay_clothes">Pagar la compra</string>
+    <string name="textView_title_resume">Lista compra</string>
+    <string name="button_delete_clothe">Eliminar</string>
+    <string name="button_modify_clothe">Modificar</string>
+    <string name="button_insert_barcode">Insertar código</string>
+    <string name="editText_num_barcode">Código de barras</string>
+    <string name="textView_title_dialog_code">Inserte los número del código de barras</string>
 </resources>

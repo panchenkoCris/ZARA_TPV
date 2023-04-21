@@ -1,17 +1,29 @@
 package com.example.zara_tpv.windows;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.content.Context;
+import android.content.res.Resources;
 import android.net.Uri;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.VideoView;
 
-import com.example.zara_tpv.R;
+import java.util.Locale;
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
 
-public class FirstWindow extends AppCompatActivity {
+import com.example.zara_tpv.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+public class FirstWindow extends AppCompatActivity implements View.OnClickListener {
     VideoView vv;
+    Context context;
+    Resources res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +36,25 @@ public class FirstWindow extends AppCompatActivity {
         vv.start();
 
         vv.setOnPreparedListener(mp -> mp.setLooping(true));
+
+        FloatingActionButton button_spanish = findViewById(R.id.button_languageSpanish);
+        FloatingActionButton button_english = findViewById(R.id.button_languageEnglish);
+        button_spanish.setOnClickListener(this);
+        button_english.setOnClickListener(this);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        FloatingActionButton fab = (FloatingActionButton) v;
+        switch (fab.getId()) {
+            case R.id.button_languageSpanish:
+                setLocale("es");
+                break;
+            case R.id.button_languageEnglish:
+                setLocale("en");
+                break;
+        }
     }
 
     @Override
@@ -50,7 +81,13 @@ public class FirstWindow extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public void launchMainActivity(View view) {
-        startActivity(new Intent(this, MainWindow.class));
+    public void setLocale(String language) {
+        Locale myLocale = new Locale(language);
+        Resources res = this.getResources();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, res.getDisplayMetrics());
+        finish();
+        startActivity(new Intent(this, ResumeShopWindow.class));
     }
 }
