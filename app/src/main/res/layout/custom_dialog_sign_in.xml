@@ -6,81 +6,121 @@
     android:layout_height="match_parent"
     android:padding="10dp">
 
-    <TextView
-        android:id="@+id/textView_title_sign_in"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:text="@string/textView_title_sign_in"
-        android:textAlignment="center"
-        android:textSize="25dp" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/icon_login" />
+
+        <TextView
+            android:id="@+id/textView_title_sign_in"
+            android:layout_width="421dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="@string/textView_title_sign_in"
+            android:textAlignment="viewStart"
+            android:textSize="16sp" />
+    </LinearLayout>
 
     <RelativeLayout
-        android:layout_width="846dp"
-        android:layout_height="96dp"
+        android:layout_width="560dp"
+        android:layout_height="75dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp">
 
         <TextView
             android:id="@+id/textView_title_username"
-            android:layout_width="145dp"
-            android:layout_height="48dp"
+            android:layout_width="109dp"
+            android:layout_height="39dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="91dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginStart="41dp"
+            android:layout_marginTop="22dp"
             android:text="@string/textView_title_username"
             android:textAlignment="center"
-            android:textSize="20dp" />
+            android:textSize="25dp" />
 
         <EditText
             android:id="@+id/editText_username_sign_in"
-            android:layout_width="538dp"
+            android:layout_width="342dp"
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="51dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="38dp"
+            android:layout_marginBottom="16dp"
+            android:layout_toEndOf="@+id/textView_title_username"
             android:ems="10"
             android:hint="@string/editText_username"
             android:inputType="textPersonName"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:textSize="25dp" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="99dp"
+        android:layout_width="557dp"
+        android:layout_height="98dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp">
 
         <TextView
             android:id="@+id/textView_title_password"
-            android:layout_width="306dp"
-            android:layout_height="48dp"
+            android:layout_width="131dp"
+            android:layout_height="39dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="59dp"
-            android:layout_marginTop="29dp"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="25dp"
             android:text="@string/textView_title_password"
             android:textAlignment="center"
-            android:textSize="20sp" />
+            android:textSize="25dp" />
 
         <EditText
             android:id="@+id/editText_password_sign_in"
-            android:layout_width="540dp"
-            android:layout_height="48dp"
+            android:layout_width="337dp"
+            android:layout_height="51dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="52dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="33dp"
+            android:layout_marginBottom="29dp"
+            android:layout_toEndOf="@+id/textView_title_password"
             android:ems="10"
             android:hint="@string/editText_password"
             android:inputType="textPassword"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:textSize="25dp" />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView_sign_up"
+        android:layout_width="536dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/textView_sign_up"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/button_sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_sign_in" />
 
 </LinearLayout>

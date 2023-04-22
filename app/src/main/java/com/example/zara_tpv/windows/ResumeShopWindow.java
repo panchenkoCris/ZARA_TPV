@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.zara_tpv.R;
 import com.example.zara_tpv.adapter.ListClothesAdapter;
+import com.example.zara_tpv.manager.DialogManager;
 import com.example.zara_tpv.pojo.ListClothes;
 
 import java.util.ArrayList;
@@ -46,29 +47,38 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         clothes.add(new ListClothes("blusa", "38", "2.90"));
         clothes.add(new ListClothes("blusa", "38", "2.90"));
 
+        setAdapter();
+        setRecyclerView((RecyclerView) findViewById(R.id.recyclerView_clothes));
+        setToolbar((Toolbar) findViewById(R.id.toolbar));
+        setButtons((Button) findViewById(R.id.button_openScannerCode),
+                (Button) findViewById(R.id.button_openDialogCode));
+    }
 
-        recyclerView = findViewById(R.id.recyclerView_clothes);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new ListClothesAdapter(clothes, new ListClothesAdapter.OnItemClickListener() {
+    private void setAdapter() {
+        adapter =  new ListClothesAdapter(clothes, new ListClothesAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(ListClothes clothe) {
-                openDialogClothe();
+                DialogManager.openDialogClothe(ResumeShopWindow.this, adapter, clothe, clothes.indexOf(clothe));
             }
-        }));
+        });
+    }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    private void setButtons(Button openDialog, Button openScanner) {
+        openDialog.setOnClickListener(this);
+        openScanner.setOnClickListener(this);
+    }
+
+    private void setToolbar(Toolbar toolbar) {
         toolbar.setTitle("");
 
         Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.icon_menu);
         toolbar.setOverflowIcon(drawable);
         setSupportActionBar(toolbar);
+    }
 
-        Button openScanner = (Button) findViewById(R.id.button_openScannerCode);
-        Button openDialog = (Button) findViewById(R.id.button_openDialogCode);
-
-        openDialog.setOnClickListener(this);
-        openScanner.setOnClickListener(this);
-
+    private void setRecyclerView(RecyclerView recyclerView) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -81,10 +91,10 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_dresser:
-                Toast.makeText(this, "Dresser", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Account", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_account:
-                Toast.makeText(this, "Account", Toast.LENGTH_SHORT).show();
+                DialogManager.openDialogLogin(this);
                 break;
             case R.id.action_shopping:
                 Toast.makeText(this, "Shopping", Toast.LENGTH_SHORT).show();
@@ -100,7 +110,7 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         Button b = (Button) v;
         switch (b.getId()) {
             case R.id.button_openDialogCode:
-                openDialogCode();
+                DialogManager.openDialogCode(this);
                 break;
             case R.id.button_openScannerCode:
                 startActivity(new Intent(this, ScannerWindow.class));
@@ -108,35 +118,5 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private void openDialogCode() {
-        final Dialog dialog = new Dialog(ResumeShopWindow.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true);
-        dialog.setContentView(R.layout.custom_dialog_code);
 
-        final EditText numBarcode = dialog.findViewById(R.id.editText_num_barcode);
-        final Button buttonInsertBarcode = dialog.findViewById(R.id.button_insert_barcode);
-
-        buttonInsertBarcode.setOnClickListener((v) -> {
-            //int barcode = Integer.parseInt(numBarcode.getText().toString());
-            dialog.dismiss();
-        });
-        dialog.show();
-    }
-
-    private void openDialogClothe() {
-        final Dialog dialog = new Dialog(ResumeShopWindow.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true);
-        dialog.setContentView(R.layout.custom_dialog_clothe);
-
-        final TextView textName = dialog.findViewById(R.id.textView_name_clothe);
-        final Button buttonModifyClothe = dialog.findViewById(R.id.button_modify_clothe);
-
-        buttonModifyClothe.setOnClickListener((v) -> {
-            //int barcode = Integer.parseInt(numBarcode.getText().toString());
-            dialog.dismiss();
-        });
-        dialog.show();
-    }
 }

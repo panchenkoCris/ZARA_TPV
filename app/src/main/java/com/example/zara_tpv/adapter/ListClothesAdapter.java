@@ -50,6 +50,12 @@ public class ListClothesAdapter extends RecyclerView.Adapter<ListClothesAdapter.
         return data.size();
     }
 
+    public void removeItem(int position) {
+        data.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, data.size());
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iconImage;
         TextView name, size, price;

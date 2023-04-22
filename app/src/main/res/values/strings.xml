@@ -8,16 +8,18 @@
     <string name="button_first_window">
         Comenzar
     </string>
+
+    <!-- Elementos del recyclerView -->
     <string name="textView_choose_code_option">
         Escoja alguna de las siguientes opciones para leer el código de la prenda
     </string>
     <string name="button_qrscanner_code">Escáner</string>
     <string name="button_dialog_code">Teclado</string>
-    <!-- Elementos del recyclerView -->
     <string name="textView_title_name_clothe">Nombre: </string>
     <string name="textView_title_size_clothe">Talla: </string>
     <string name="textView_title_price_clothe">Precio: </string>
     <string name="textView_title_color_clothe">Color: </string>
+
     <!-- Elementos de la pantalla 'ResumeShopWindow -->
     <string name="textView_pay_clothes">Pagar la compra</string>
     <string name="textView_title_resume">Lista compra</string>
@@ -25,12 +27,19 @@
     <string name="button_modify_clothe">Modificar</string>
     <string name="button_insert_barcode">Insertar código</string>
     <string name="editText_num_barcode">Código de barras</string>
-    <string name="textView_title_dialog_code">Inserte los número del código de barras</string>
+    <string name="textView_title_dialog_code">Insertar código de barras</string>
     <string name="textView_title_view_clothe">Visualizar prenda del carrito</string>
+    <string name="textView_text_dialog_code">Inserte los número del código de barras</string>
+
     <!-- Elementos del dialog 'custom_dialog_sign_in -->
-    <string name="textView_title_sign_in">Pantalla inicio de sesion</string>
+    <string name="textView_title_sign_in">Iniciar sesion</string>
     <string name="editText_username">Inserte su dni</string>
     <string name="textView_title_username">Usuario: </string>
     <string name="textView_title_password">Contraseña: </string>
     <string name="editText_password">Inserte la contraseña</string>
+    <string name="button_sign_in">Iniciar sesión</string>
+    <string name="message_delete_clothe">Prenda eliminada</string>
+    <string name="textView_sign_up">¿No tienes una cuenta? Registrate ahora</string>
+
+
 </resources>

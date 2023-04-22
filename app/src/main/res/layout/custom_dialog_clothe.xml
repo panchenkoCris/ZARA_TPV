@@ -3,21 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView_title_view_clothe"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:fontFamily="sans-serif-thin"
-        android:text="@string/textView_title_view_clothe"
-        android:textAlignment="center"
-        android:textSize="25sp" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="50dp"
+            android:src="@drawable/icon_modify_watch"/>
+
+        <TextView
+            android:id="@+id/textView_title_view_clothe"
+            android:layout_width="421dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="@string/textView_title_view_clothe"
+            android:textAlignment="viewStart"
+            android:textSize="16sp" />
+    </LinearLayout>
 
     <LinearLayout
-        android:layout_width="999dp"
-        android:layout_height="wrap_content"
+        android:layout_width="779dp"
+        android:layout_height="404dp"
         android:layout_marginLeft="50dp"
         android:orientation="horizontal">
 
@@ -29,7 +43,7 @@
             app:srcCompat="@drawable/icon_styler" />
 
         <RelativeLayout
-            android:layout_width="552dp"
+            android:layout_width="480dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
@@ -55,8 +69,8 @@
 
             <Spinner
                 android:id="@+id/spinnerSize"
-                android:layout_width="395dp"
-                android:layout_height="52dp"
+                android:layout_width="316dp"
+                android:layout_height="48dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="116dp"
@@ -76,7 +90,7 @@
 
             <Spinner
                 android:id="@+id/spinnerColor"
-                android:layout_width="395dp"
+                android:layout_width="314dp"
                 android:layout_height="48dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
@@ -86,32 +100,32 @@
 
             <Button
                 android:id="@+id/button_modify_clothe"
-                android:layout_width="212dp"
-                android:layout_height="62dp"
+                android:layout_width="197dp"
+                android:layout_height="53dp"
                 android:layout_below="@+id/spinnerColor"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="51dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="289dp"
-                android:layout_marginBottom="52dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="263dp"
+                android:layout_marginBottom="86dp"
                 android:backgroundTint="#E1DFDF"
                 android:drawableLeft="@drawable/icon_modify"
                 android:text="@string/button_modify_clothe" />
 
             <Button
                 android:id="@+id/button_delete_clothe"
-                android:layout_width="214dp"
-                android:layout_height="62dp"
+                android:layout_width="197dp"
+                android:layout_height="53dp"
                 android:layout_below="@+id/spinnerColor"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="273dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="65dp"
-                android:layout_marginBottom="52dp"
+                android:layout_marginStart="224dp"
+                android:layout_marginTop="27dp"
+                android:layout_marginEnd="59dp"
+                android:layout_marginBottom="87dp"
                 android:backgroundTint="#E1DFDF"
                 android:drawableLeft="@drawable/icon_delete"
                 android:text="@string/button_delete_clothe" />
