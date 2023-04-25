@@ -41,4 +41,9 @@
     <string name="button_sign_in">Sign in</string>
     <string name="message_delete_clothe">Deleted garment</string>
     <string name="textView_sign_up">Don\'t have an account? Register now</string>
+    <string name="textView_title_name_category">Category</string>
+
+    <string name="title_shop">P U R C H A S E</string>
+    <string name="title_login">Z A R A - A C C O U N T</string>
+    <string name="title_dresser">S H O P</string>
 </resources>

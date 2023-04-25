@@ -22,8 +22,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class FirstWindow extends AppCompatActivity implements View.OnClickListener {
     VideoView vv;
-    Context context;
-    Resources res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

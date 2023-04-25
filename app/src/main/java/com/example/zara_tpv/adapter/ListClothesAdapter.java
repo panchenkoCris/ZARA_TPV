@@ -1,14 +1,8 @@
 package com.example.zara_tpv.adapter;
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -80,7 +74,6 @@ public class ListClothesAdapter extends RecyclerView.Adapter<ListClothesAdapter.
             });
         }
     }
-
 }
 
 

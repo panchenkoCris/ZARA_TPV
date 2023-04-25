@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
@@ -73,6 +74,29 @@ public class DialogManager {
         dialog.show();
     }
 
+    public static void openDialogClothe(Context context, ListClothes clothe) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.custom_dialog_clothe);
+
+        final TextView textName = dialog.findViewById(R.id.textView_title_name_clothe);
+        final Button buttonModifyClothe = dialog.findViewById(R.id.button_modify_clothe);
+        final Button buttonDeleteClothe = dialog.findViewById(R.id.button_delete_clothe);
+
+        textName.setText(clothe.getName());
+
+        buttonModifyClothe.setOnClickListener((v) -> {
+            dialog.dismiss();
+        });
+
+        buttonDeleteClothe.setOnClickListener((v) -> {
+            dialog.dismiss();
+        });
+
+        dialog.show();
+    }
+
     public static void openDialogLogin(Context context) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -86,6 +110,21 @@ public class DialogManager {
 
         setSpannableString(textViewSignUp, context);
 
+//        SpannableString registerString = new SpannableString(context.getString(R.string.textView_sign_up));
+//        ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.BLUE);
+//        ClickableSpan registerSpan = new ClickableSpan() {
+//            @Override
+//            public void onClick(@NonNull View widget) {
+//                openDialogCode(context);
+//            }
+//        };
+//
+//        registerString.setSpan(registerSpan, 0, registerString.length(),
+//                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        registerString.setSpan(colorSpan, 0, registerString.length(),
+//                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        textViewSignUp.setText(registerString);
+
         buttonSignIn.setOnClickListener((v) -> {
             //int barcode = Integer.parseInt(numBarcode.getText().toString());
             dialog.dismiss();
@@ -94,19 +133,22 @@ public class DialogManager {
     }
 
     private static void setSpannableString(TextView textView, Context context) {
-        SpannableString registerString = new SpannableString(context.getString(R.string.textView_sign_up));
-        ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.BLUE);
-        ClickableSpan registerSpan = new ClickableSpan() {
+        final SpannableString registerString = new SpannableString(context.getString(R.string.textView_sign_up));
+        applySpan(registerString, context.getString(R.string.textView_sign_up), new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
-                openDialogCode(context);
+                openDialogSignUp(context);
             }
-        };
+        });
 
-        registerString.setSpan(registerSpan, 0, registerString.length(),
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        registerString.setSpan(colorSpan, 0, registerString.length(),
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.setText(registerString);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    private static void applySpan(SpannableString spannable, String target, ClickableSpan span) {
+        final String spannableString = spannable.toString();
+        final int start = spannableString.indexOf(target);
+        final int end = start + target.length();
+        spannable.setSpan(span, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 }

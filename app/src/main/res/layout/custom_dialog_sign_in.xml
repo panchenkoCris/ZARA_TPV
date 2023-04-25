@@ -112,7 +112,6 @@
         android:id="@+id/textView_sign_up"
         android:layout_width="536dp"
         android:layout_height="24dp"
-        android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:text="@string/textView_sign_up"
         android:textAlignment="center" />
@@ -121,6 +120,7 @@
         android:id="@+id/button_sign_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/button_sign_in" />
 
 </LinearLayout>

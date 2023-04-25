@@ -6,22 +6,19 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zara_tpv.R;
 import com.example.zara_tpv.adapter.ListClothesAdapter;
 import com.example.zara_tpv.manager.DialogManager;
+import com.example.zara_tpv.manager.ListManager;
 import com.example.zara_tpv.pojo.ListClothes;
 
 import java.util.ArrayList;
@@ -29,7 +26,7 @@ import java.util.List;
 
 
 public class ResumeShopWindow extends AppCompatActivity implements View.OnClickListener {
-    private List<ListClothes> clothes;
+    private List<ListClothes> clothes = new ArrayList<>();
     private ListClothesAdapter adapter;
     private RecyclerView recyclerView;
 
@@ -38,18 +35,10 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resume_shop_window);
 
-        clothes = new ArrayList<>();
-        clothes.add(new ListClothes("blusa", "38", "2.90"));
-        clothes.add(new ListClothes("blusa", "38", "2.90"));
-        clothes.add(new ListClothes("blusa", "38", "2.90"));
-        clothes.add(new ListClothes("blusa", "38", "2.90"));
-        clothes.add(new ListClothes("blusa", "38", "2.90"));
-        clothes.add(new ListClothes("blusa", "38", "2.90"));
-        clothes.add(new ListClothes("blusa", "38", "2.90"));
-
+        clothes = ListManager.getClothes();
         setAdapter();
         setRecyclerView((RecyclerView) findViewById(R.id.recyclerView_clothes));
-        setToolbar((Toolbar) findViewById(R.id.toolbar));
+        setToolbar((Toolbar) findViewById(R.id.toolbar_menu));
         setButtons((Button) findViewById(R.id.button_openScannerCode),
                 (Button) findViewById(R.id.button_openDialogCode));
     }
@@ -69,7 +58,7 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
     }
 
     private void setToolbar(Toolbar toolbar) {
-        toolbar.setTitle("");
+        toolbar.setTitle(R.string.title_shop);
 
         Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.icon_menu);
         toolbar.setOverflowIcon(drawable);
@@ -91,7 +80,7 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_dresser:
-                Toast.makeText(this, "Account", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, ShopWindow.class));
                 break;
             case R.id.action_account:
                 DialogManager.openDialogLogin(this);

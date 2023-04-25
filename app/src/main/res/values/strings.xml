@@ -40,6 +40,9 @@
     <string name="button_sign_in">Iniciar sesión</string>
     <string name="message_delete_clothe">Prenda eliminada</string>
     <string name="textView_sign_up">¿No tienes una cuenta? Registrate ahora</string>
+    <string name="textView_title_name_category">Categoria</string>
 
-
+    <string name="title_shop">C O M P R A</string>
+    <string name="title_login">C U E N T A - Z A R A</string>
+    <string name="title_dresser">T I E N D A</string>
 </resources>
