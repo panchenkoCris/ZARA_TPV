@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="attributes_colors">
+        <item>@string/textView_title_color_clothe</item>
+        <item>@string/black</item>
+        <item>@string/pink</item>
+    </string-array>
+</resources>

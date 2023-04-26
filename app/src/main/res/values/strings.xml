@@ -15,10 +15,10 @@
     </string>
     <string name="button_qrscanner_code">Escáner</string>
     <string name="button_dialog_code">Teclado</string>
-    <string name="textView_title_name_clothe">Nombre: </string>
-    <string name="textView_title_size_clothe">Talla: </string>
-    <string name="textView_title_price_clothe">Precio: </string>
-    <string name="textView_title_color_clothe">Color: </string>
+    <string name="textView_title_name_clothe">Nombre</string>
+    <string name="textView_title_size_clothe">Talla</string>
+    <string name="textView_title_price_clothe">Precio</string>
+    <string name="textView_title_color_clothe">Color</string>
 
     <!-- Elementos de la pantalla 'ResumeShopWindow -->
     <string name="textView_pay_clothes">Pagar la compra</string>
@@ -45,4 +45,8 @@
     <string name="title_shop">C O M P R A</string>
     <string name="title_login">C U E N T A - Z A R A</string>
     <string name="title_dresser">T I E N D A</string>
+
+    <string name="editText_filter_name">Inserte la referencia de la prenda</string>
+    <string name="black">Negro</string>
+    <string name="pink">Rosa</string>
 </resources>

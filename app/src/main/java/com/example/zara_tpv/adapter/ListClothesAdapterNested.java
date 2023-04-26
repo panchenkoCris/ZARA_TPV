@@ -19,11 +19,13 @@ import com.example.zara_tpv.manager.ListManager;
 import com.example.zara_tpv.pojo.ListClothes;
 import com.example.zara_tpv.pojo.ListClothesNested;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListClothesAdapterNested extends RecyclerView.Adapter<ListClothesAdapterNested.ItemViewHolder> {
+    private ListClothesAdapterHorizontal adapterHorizontal;
     private List<ListClothesNested> data;
-    private List<ListClothes> list = ListManager.getClothes();
+    private List<ListClothes> list = new ArrayList<>();
     private Context context;
 
     public ListClothesAdapterNested(List<ListClothesNested> data, Context context) {
@@ -39,21 +41,22 @@ public class ListClothesAdapterNested extends RecyclerView.Adapter<ListClothesAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+    public synchronized void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         ListClothesNested model = data.get(position);
         holder.nameCategory.setText(model.getNameCategory());
 
         boolean isExpandable = model.isExpandable();
-        holder.recyclerView.setVisibility(isExpandable ? View.VISIBLE : View.GONE);
+        holder.recyclerView.setVisibility((isExpandable) ? View.VISIBLE: View.GONE);
 
         holder.imageArrow.setImageResource((isExpandable) ? R.drawable.arrow_up : R.drawable.arrow_down);
 
-        ListClothesAdapterHorizontal adapterHorizontal = new ListClothesAdapterHorizontal(list, new ListClothesAdapterHorizontal.OnItemClickListener() {
+        adapterHorizontal = new ListClothesAdapterHorizontal(list, new ListClothesAdapterHorizontal.OnItemClickListener() {
             @Override
             public void onItemClick(ListClothes clothe) {
                 DialogManager.openDialogClothe(context, clothe);
             }
         });
+
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext(), LinearLayoutManager.HORIZONTAL, false));
         holder.recyclerView.setHasFixedSize(true);
         holder.recyclerView.setAdapter(adapterHorizontal);
@@ -66,11 +69,16 @@ public class ListClothesAdapterNested extends RecyclerView.Adapter<ListClothesAd
                 notifyItemChanged(holder.getAdapterPosition());
             }
         });
+
     }
 
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public ListClothesAdapterHorizontal getAdapterHorizontal() {
+        return adapterHorizontal;
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {

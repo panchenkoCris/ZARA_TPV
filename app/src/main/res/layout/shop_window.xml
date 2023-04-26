@@ -10,8 +10,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_menu"
-        android:layout_width="0dp"
-        android:layout_height="58dp"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
         android:backgroundTint="#E1DFDF"
         android:gravity="center_vertical|start"
         android:minHeight="?attr/actionBarSize"
@@ -24,14 +24,79 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_menu_clothes"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="100dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="22dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_menu"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editText_filter_name"
+                android:layout_width="696dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/rounded_edittext"
+                android:drawableLeft="@drawable/icon_search"
+                android:ems="10"
+                android:hint="@string/editText_filter_name"
+                android:inputType="textPersonName"
+                android:padding="5dp"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.173"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_menu"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Spinner
+                android:id="@+id/spinner_filter_color"
+                android:layout_width="241dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/rounded_spinner"
+                android:contentDescription="@string/app_name"
+                android:dropDownVerticalOffset="50dp"
+                android:minHeight="48dp"
+                android:padding="5dp">
+            </Spinner>
+            <Spinner
+                android:id="@+id/spinner_filter_size"
+                android:layout_width="241dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/rounded_spinner"
+                android:contentDescription="@string/app_name"
+                android:dropDownVerticalOffset="50dp"
+                android:minHeight="48dp"
+                android:padding="5dp">
+            </Spinner>
+
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_menu_clothes"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText_filter_name" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,7 +35,7 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resume_shop_window);
 
-        clothes = ListManager.getClothes();
+        clothes = ListManager.getCategoryClothes();
         setAdapter();
         setRecyclerView((RecyclerView) findViewById(R.id.recyclerView_clothes));
         setToolbar((Toolbar) findViewById(R.id.toolbar_menu));

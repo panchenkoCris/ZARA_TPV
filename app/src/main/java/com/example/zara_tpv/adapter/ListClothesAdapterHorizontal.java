@@ -44,6 +44,11 @@ public class ListClothesAdapterHorizontal extends RecyclerView.Adapter<ListCloth
         return data.size();
     }
 
+    public void filterReference(List<ListClothes> filterList) {
+        data = filterList;
+        notifyDataSetChanged();
+    }
+
 
     public class ViewHolderHorizontal extends RecyclerView.ViewHolder {
         TextView name;
