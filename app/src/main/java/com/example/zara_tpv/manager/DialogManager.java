@@ -2,14 +2,11 @@ package com.example.zara_tpv.manager;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -22,12 +19,10 @@ import androidx.annotation.NonNull;
 import com.example.zara_tpv.R;
 import com.example.zara_tpv.adapter.ListClothesAdapter;
 import com.example.zara_tpv.pojo.ListClothes;
-import com.example.zara_tpv.windows.ResumeShopWindow;
-
-import org.w3c.dom.Text;
 
 public class DialogManager {
     private Resources res;
+
     public static void openDialogCode(Context context) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -46,7 +41,44 @@ public class DialogManager {
     }
 
     private static void openDialogSignUp(Context context) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.custom_dialog_sign_up);
 
+        final EditText textIdentification = dialog.findViewById(R.id.editText_username_sign_up);
+        final EditText textNumber = dialog.findViewById(R.id.editText_telephone_sign_up);
+        final EditText textEmail = dialog.findViewById(R.id.editText_email_sign_up);
+        final EditText textPassword = dialog.findViewById(R.id.editText_password_sign_up);
+        final EditText textRepeatPassword = dialog.findViewById(R.id.editText_repeat_password_sign_up);
+        final Button buttonSignUp = dialog.findViewById(R.id.button_sign_up);
+
+        EditText[] textToValidate = {textIdentification, textEmail, textNumber, textPassword, textRepeatPassword};
+
+        buttonSignUp.setOnClickListener((v) -> {
+            if(ValidatorManager.passValidation(textToValidate, context)) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    public static void openDialogError(Context context, String textError) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.custom_error_dialog);
+
+        final TextView textErr = dialog.findViewById(R.id.errorDesc);
+        final Button buttonClose = dialog.findViewById(R.id.errorButton);
+        textErr.setText(textError);
+
+        buttonClose.setOnClickListener((v) -> {
+            dialog.dismiss();
+        });
+
+        dialog.show();
     }
 
     public static void openDialogClothe(Context context, ListClothesAdapter adapter, ListClothes clothe, int position) {
@@ -110,25 +142,20 @@ public class DialogManager {
 
         setSpannableString(textViewSignUp, context);
 
-//        SpannableString registerString = new SpannableString(context.getString(R.string.textView_sign_up));
-//        ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.BLUE);
-//        ClickableSpan registerSpan = new ClickableSpan() {
-//            @Override
-//            public void onClick(@NonNull View widget) {
-//                openDialogCode(context);
-//            }
-//        };
-//
-//        registerString.setSpan(registerSpan, 0, registerString.length(),
-//                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        registerString.setSpan(colorSpan, 0, registerString.length(),
-//                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        textViewSignUp.setText(registerString);
-
         buttonSignIn.setOnClickListener((v) -> {
             //int barcode = Integer.parseInt(numBarcode.getText().toString());
+            if(!ValidatorManager.passValidationContent(usernameSignIn, context)
+                    || !ValidatorManager.passValidationContent(usernameSignIn, context)) {
+                openDialogError(context, context.getResources().getString(R.string.message_error_empty_field));
+            }
             dialog.dismiss();
         });
+
+        textViewSignUp.setOnClickListener((v) -> {
+            openDialogSignUp(context);
+            dialog.dismiss();
+        });
+
         dialog.show();
     }
 
@@ -137,7 +164,6 @@ public class DialogManager {
         applySpan(registerString, context.getString(R.string.textView_sign_up), new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
-                openDialogSignUp(context);
             }
         });
 

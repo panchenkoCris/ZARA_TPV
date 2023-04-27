@@ -23,30 +23,51 @@
     <!-- Elementos de la pantalla 'ResumeShopWindow -->
     <string name="textView_pay_clothes">Pagar la compra</string>
     <string name="textView_title_resume">Lista compra</string>
+    <string name="textView_title_dialog_code">Insertar código de barras</string>
+    <string name="textView_title_view_clothe">Visualizar prenda del carrito</string>
+    <string name="textView_text_dialog_code">Inserte los número del código de barras</string>
     <string name="button_delete_clothe">Eliminar</string>
     <string name="button_modify_clothe">Modificar</string>
     <string name="button_insert_barcode">Insertar código</string>
     <string name="editText_num_barcode">Código de barras</string>
-    <string name="textView_title_dialog_code">Insertar código de barras</string>
-    <string name="textView_title_view_clothe">Visualizar prenda del carrito</string>
-    <string name="textView_text_dialog_code">Inserte los número del código de barras</string>
-
-    <!-- Elementos del dialog 'custom_dialog_sign_in -->
-    <string name="textView_title_sign_in">Iniciar sesion</string>
-    <string name="editText_username">Inserte su dni</string>
-    <string name="textView_title_username">Usuario: </string>
-    <string name="textView_title_password">Contraseña: </string>
-    <string name="editText_password">Inserte la contraseña</string>
-    <string name="button_sign_in">Iniciar sesión</string>
     <string name="message_delete_clothe">Prenda eliminada</string>
-    <string name="textView_sign_up">¿No tienes una cuenta? Registrate ahora</string>
-    <string name="textView_title_name_category">Categoria</string>
 
+    <!-- Elementos del dialog 'custom_dialog_sign_in && custom_dialog_sign_up' -->
+    <string name="textView_title_sign_in">Iniciar sesion</string>
+    <string name="textView_title_username">Usuario</string>
+    <string name="textView_title_password">Contraseña</string>
+    <string name="textView_title_sign_up">Registrar</string>
+    <string name="textView_title_telephone">Télefono</string>
+    <string name="textView_title_email">Gmail</string>
+    <string name="textView_sign_up">¿No tienes una cuenta? Registrate ahora</string>
+    <string name="textView_title_repeat_password">Confirmar contraseña</string>
+    <string name="editText_username">Inserte su dni</string>
+    <string name="editText_password">Inserte la contraseña</string>
+    <string name="editText_telephone_sign_up">Inserte su número</string>
+    <string name="editText_email_sign_up">Inserte su correo</string>
+    <string name="editText_repeat_password_sign_up">Repita la contraseña</string>
+    <string name="button_sign_in">Iniciar sesión</string>
+    <string name="button_sign_up">Registrarse</string>
+
+    <!-- Titulos de los apartados del menú y de las ventanas -->
     <string name="title_shop">C O M P R A</string>
     <string name="title_login">C U E N T A - Z A R A</string>
     <string name="title_dresser">T I E N D A</string>
 
+    <!-- Elementos de la ventana 'shop_window', los filtros -->
+    <string name="textView_title_name_category">Categoria</string>
     <string name="editText_filter_name">Inserte la referencia de la prenda</string>
     <string name="black">Negro</string>
     <string name="pink">Rosa</string>
+
+    <!-- Elementos del dialog 'custom_error_dialog' && mensajes de error -->
+    <string name="textView_errorTitle">Error</string>
+    <string name="button_error">Cerrar</string>
+    <string name="textView_errorDesc">Ha sucedido un error</string>
+    <string name="message_error_empty_field">Hay un campo vacio</string>
+    <string name="message_error_different_passwords">Las contraseñas no coinciden</string>
+    <string name="message_error_not_letters">Solo debe insertar letras en el dni</string>
+    <string name="message_error_not_long">La longitud del dni debe ser de 8 carácteres</string>
+
+
 </resources>

@@ -2,12 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_dresser"
-        android:title="Tienda"/>
-    <item
-        android:id="@+id/action_account"
-        android:title="Cuenta ZARA"/>
-    <item
-        android:id="@+id/action_shopping"
-        android:title="Compra"/>
+        android:id="@+id/menuPersonalized"
+        android:icon="@drawable/icon_menu"
+        app:showAsAction="always"
+        android:title="">
+        <menu>
+            <item
+                android:id="@+id/action_dresser"
+                android:icon="@drawable/icon_styler"
+                android:title="@string/title_dresser"/>
+            <item
+                android:id="@+id/action_account"
+                android:icon="@drawable/icon_login"
+                android:title="@string/title_login"/>
+            <item
+                android:id="@+id/action_shopping"
+                android:icon="@drawable/icon_shopping_bag"
+                android:title="@string/title_shop"/>
+        </menu>
+    </item>
 </menu>

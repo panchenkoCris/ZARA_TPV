@@ -62,6 +62,7 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
 
         Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.icon_menu);
         toolbar.setOverflowIcon(drawable);
+        toolbar.setContentInsetsAbsolute(40,0);
         setSupportActionBar(toolbar);
     }
 

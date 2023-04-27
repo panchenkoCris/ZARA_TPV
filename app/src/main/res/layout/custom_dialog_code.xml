@@ -59,7 +59,7 @@
         android:layout_height="53dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:backgroundTint="#E1DFDF"
+        android:backgroundTint="@color/light_beige"
         android:text="@string/button_insert_barcode"
         android:textColor="#000000" />
 

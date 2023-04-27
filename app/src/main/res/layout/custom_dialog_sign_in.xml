@@ -40,7 +40,7 @@
         android:layout_marginEnd="10dp">
 
         <TextView
-            android:id="@+id/textView_title_username"
+            android:id="@+id/textView_title_username_sign_in"
             android:layout_width="109dp"
             android:layout_height="39dp"
             android:layout_alignParentStart="true"
@@ -62,7 +62,7 @@
             android:layout_marginTop="13dp"
             android:layout_marginEnd="38dp"
             android:layout_marginBottom="16dp"
-            android:layout_toEndOf="@+id/textView_title_username"
+            android:layout_toEndOf="@+id/textView_title_username_sign_in"
             android:ems="10"
             android:hint="@string/editText_username"
             android:inputType="textPersonName"
@@ -78,7 +78,7 @@
         android:layout_marginEnd="10dp">
 
         <TextView
-            android:id="@+id/textView_title_password"
+            android:id="@+id/textView_title_password_sign_in"
             android:layout_width="131dp"
             android:layout_height="39dp"
             android:layout_alignParentStart="true"
@@ -100,7 +100,7 @@
             android:layout_marginTop="18dp"
             android:layout_marginEnd="33dp"
             android:layout_marginBottom="29dp"
-            android:layout_toEndOf="@+id/textView_title_password"
+            android:layout_toEndOf="@+id/textView_title_password_sign_in"
             android:ems="10"
             android:hint="@string/editText_password"
             android:inputType="textPassword"
@@ -111,8 +111,9 @@
     <TextView
         android:id="@+id/textView_sign_up"
         android:layout_width="536dp"
-        android:layout_height="24dp"
-        android:layout_marginBottom="20dp"
+        android:layout_height="67dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
         android:text="@string/textView_sign_up"
         android:textAlignment="center" />
 
@@ -120,7 +121,7 @@
         android:id="@+id/button_sign_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="@string/button_sign_in" />
 
 </LinearLayout>

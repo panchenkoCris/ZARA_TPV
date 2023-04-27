@@ -24,30 +24,51 @@
     <!-- Elementos de la pantalla 'ResumeShopWindow -->
     <string name="textView_title_resume">Shop list</string>
     <string name="textView_pay_clothes">Pay the purchase</string>
+    <string name="textView_title_dialog_code">Insert barcode</string>
+    <string name="textView_title_view_clothe">Visualise garment from cart</string>
+    <string name="textView_text_dialog_code">Insert the numbers from the barcode</string>
     <string name="button_delete_clothe">Delete</string>
     <string name="button_modify_clothe">Modify</string>
     <string name="button_insert_barcode">Insert code</string>
     <string name="editText_num_barcode">Barcode</string>
-    <string name="textView_title_dialog_code">Insert barcode</string>
-    <string name="textView_title_view_clothe">Visualise garment from cart</string>
-    <string name="textView_text_dialog_code">Insert the numbers from the barcode</string>
+    <string name="message_delete_clothe">Deleted garment</string>
 
     <!-- Elementos del dialog 'custom_dialog_sign_in && custom_dialog_sign_up -->
     <string name="textView_title_sign_in">Login</string>
+    <string name="textView_title_repeat_password">Confirm password</string>
+    <string name="textView_title_username">User</string>
+    <string name="textView_title_password">Password</string>
+    <string name="textView_title_sign_up">Sign up</string>
+    <string name="textView_sign_up">Don\'t have an account? Register now</string>
+    <string name="textView_title_telephone">Telephone</string>
+    <string name="textView_title_email">Gmail</string>
     <string name="editText_username">Insert your identification</string>
     <string name="editText_password">Insert your password</string>
-    <string name="textView_title_username">User: </string>
-    <string name="textView_title_password">Password: </string>
+    <string name="editText_telephone_sign_up">Insert your number</string>
+    <string name="editText_email_sign_up">Insert your email</string>
+    <string name="editText_repeat_password_sign_up">Repeat password</string>
     <string name="button_sign_in">Sign in</string>
-    <string name="message_delete_clothe">Deleted garment</string>
-    <string name="textView_sign_up">Don\'t have an account? Register now</string>
-    <string name="textView_title_name_category">Category</string>
+    <string name="button_sign_up">Sign up</string>
 
+    <!-- Titulos de los apartados del menú y de las ventanas -->
     <string name="title_shop">P U R C H A S E</string>
     <string name="title_login">Z A R A - A C C O U N T</string>
     <string name="title_dresser">S H O P</string>
 
+    <!-- Elementos de la ventana 'shop_window' && los filtros -->
     <string name="editText_filter_name">Insert the reference of the garment</string>
+    <string name="textView_title_name_category">Category</string>
     <string name="black">Black</string>
     <string name="pink">Pink</string>
+
+    <!-- Elementos del dialog 'custom_error_dialog' && mensajes de error -->
+    <string name="textView_errorTitle">Error</string>
+    <string name="button_error">Close</string>
+    <string name="textView_errorDesc">Error ocurried</string>
+    <string name="message_error_empty_field">There is an empty field</string>
+    <string name="message_error_different_passwords">The passwords are not the same</string>
+    <string name="message_error_not_letters">Only enter letter in the id</string>
+    <string name="message_error_not_long">The lenght of the id must be of 8 characters</string>
+
+
 </resources>
