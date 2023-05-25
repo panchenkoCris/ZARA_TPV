@@ -22,6 +22,10 @@ public class ListClothesAdapter extends RecyclerView.Adapter<ListClothesAdapter.
         void onItemClick(Producto item);
     }
 
+    public void setProductos(List<Producto> productos) {
+        this.data = productos;
+    }
+
     public ListClothesAdapter(List<Producto> data, OnItemClickListener listener) {
         this.data = data;
         this.listener = listener;
@@ -62,14 +66,14 @@ public class ListClothesAdapter extends RecyclerView.Adapter<ListClothesAdapter.
             price = itemView.findViewById(R.id.textView_price_clothe);
         }
 
-        public void bind(Producto clothe, final OnItemClickListener listener) {
-            name.setText(clothe.getDescripcion());
-            size.setText(clothe.getTalla());
-            price.setText((int) clothe.getPrecio());
+        public void bind(Producto producto, final OnItemClickListener listener) {
+            name.setText(producto.getDescripcion());
+            size.setText(String.valueOf(producto.getTalla()));
+            price.setText(String.valueOf((int) producto.getPrecio()));
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(clothe);
+                    listener.onItemClick(producto);
                 }
             });
         }

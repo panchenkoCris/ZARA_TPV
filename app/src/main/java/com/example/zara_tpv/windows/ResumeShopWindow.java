@@ -35,13 +35,13 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resume_shop_window);
 
-        ListManager listManager = new ListManager(this);
-        clothes = listManager.getCategoryClothes();
         setAdapter();
         setRecyclerView((RecyclerView) findViewById(R.id.recyclerView_clothes));
         setToolbar((Toolbar) findViewById(R.id.toolbar_menu));
         setButtons((Button) findViewById(R.id.button_openScannerCode),
                 (Button) findViewById(R.id.button_openDialogCode));
+
+        ListManager.getCategoryClothes(adapter);
     }
 
     private void setAdapter() {
@@ -109,5 +109,7 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         }
     }
 
-
+    public static void setClothes(List<Producto> clothes) {
+        ResumeShopWindow.clothes = clothes;
+    }
 }

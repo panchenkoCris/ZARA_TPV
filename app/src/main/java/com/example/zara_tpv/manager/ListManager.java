@@ -2,6 +2,7 @@ package com.example.zara_tpv.manager;
 
 import android.content.Context;
 
+import com.example.zara_tpv.adapter.ListClothesAdapter;
 import com.example.zara_tpv.pojo.ListClothesNested;
 import com.example.zara_tpv.pojo.Producto;
 import com.example.zara_tpv.pojo.ProductoInterface;
@@ -30,14 +31,15 @@ public class ListManager {
         taskGetAllProductos.iniciar();
     }
 
-    public static List<Producto> getCategoryClothes() {
+    public static void getCategoryClothes(ListClothesAdapter adapter) {
         RetrofitService retrofitService = new RetrofitService();
         ProductoInterface productoInterface = retrofitService.getRetrofit().create(ProductoInterface.class);
         productoInterface.getAllProductos().enqueue(new Callback<List<Producto>>() {
             @Override
             public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
                 clothes = response.body();
-                clothes.size();
+                adapter.setProductos(clothes);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -45,17 +47,10 @@ public class ListManager {
 
             }
         });
-        return clothes;
-    }
 
-    public static List<ListClothesNested> getAllClothes() {
-        List<ListClothesNested> nestedList = new ArrayList<>();
-        nestedList.add(new ListClothesNested(getCategoryClothes(), "Ropa"));
-        nestedList.add(new ListClothesNested(getCategoryClothes(), "Ropa"));
-        nestedList.add(new ListClothesNested(getCategoryClothes(), "Ropa"));
-        nestedList.add(new ListClothesNested(getCategoryClothes(), "Ropa"));
-        nestedList.add(new ListClothesNested(getCategoryClothes(), "Ropa"));
-        return nestedList;
+//        List<Producto> productos = new ArrayList<>();
+//        productos.add(new Producto(1, 5, 15.0, 40, "Negro", "Elegante", 3, 2));
+//        adapter.setProductos(productos);
     }
 
     public static void setListProductos(ArrayList<Producto> ps) {

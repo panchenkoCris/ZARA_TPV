@@ -37,7 +37,7 @@ public class ShopWindow extends AppCompatActivity {
         setToolbar((Toolbar) findViewById(R.id.toolbar_menu));
 
         setRecyclerView((RecyclerView) findViewById(R.id.recyclerview_menu_clothes));
-        listNestedClothes = setListNested();
+//        listNestedClothes = setListNested();
 
         adapter = setAdapter();
         setSpinner((Spinner) findViewById(R.id.spinner_filter_size));
@@ -71,10 +71,10 @@ public class ShopWindow extends AppCompatActivity {
         spinner.setAdapter(adapterS);
     }
 
-    private List<ListClothesNested> setListNested() {
-        List<ListClothesNested> listNestedClothes = ListManager.getAllClothes();
-        return listNestedClothes;
-    }
+//    private List<ListClothesNested> setListNested() {
+//        List<ListClothesNested> listNestedClothes = ListManager.getAllClothes();
+//        return listNestedClothes;
+//    }
 
     private ListClothesAdapterNested setAdapter() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ShopWindow.this, LinearLayoutManager.VERTICAL, false);

@@ -1,13 +1,23 @@
 package com.example.zara_tpv.pojo;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Producto {
+    @SerializedName("cb_producto")
     private int cb_producto;
+    @SerializedName("existencias")
     private int existencias;
+    @SerializedName("precio")
     private double precio;
+    @SerializedName("talla")
     private int talla;
+    @SerializedName("color")
     private String color;
+    @SerializedName("descripcion")
     private String descripcion;
+    @SerializedName("id_tipo")
     private int id_tipo;
+    @SerializedName("id_categoria")
     private int id_categoria;
 
     public Producto(int cb_producto, int existencias, double precio, int talla, String color, String descripcion, int id_tipo, int id_categoria) {
