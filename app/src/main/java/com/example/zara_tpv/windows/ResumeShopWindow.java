@@ -19,14 +19,14 @@ import com.example.zara_tpv.R;
 import com.example.zara_tpv.adapter.ListClothesAdapter;
 import com.example.zara_tpv.manager.DialogManager;
 import com.example.zara_tpv.manager.ListManager;
-import com.example.zara_tpv.pojo.ListClothes;
+import com.example.zara_tpv.pojo.Producto;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class ResumeShopWindow extends AppCompatActivity implements View.OnClickListener {
-    private List<ListClothes> clothes = new ArrayList<>();
+    private static List<Producto> clothes = new ArrayList<>();
     private ListClothesAdapter adapter;
     private RecyclerView recyclerView;
 
@@ -35,7 +35,8 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resume_shop_window);
 
-        clothes = ListManager.getCategoryClothes();
+        ListManager listManager = new ListManager(this);
+        clothes = listManager.getCategoryClothes();
         setAdapter();
         setRecyclerView((RecyclerView) findViewById(R.id.recyclerView_clothes));
         setToolbar((Toolbar) findViewById(R.id.toolbar_menu));
@@ -46,7 +47,7 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
     private void setAdapter() {
         adapter =  new ListClothesAdapter(clothes, new ListClothesAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(ListClothes clothe) {
+            public void onItemClick(Producto clothe) {
                 DialogManager.openDialogClothe(ResumeShopWindow.this, adapter, clothe, clothes.indexOf(clothe));
             }
         });

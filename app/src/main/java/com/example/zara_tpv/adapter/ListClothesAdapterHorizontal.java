@@ -9,20 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zara_tpv.R;
-import com.example.zara_tpv.pojo.ListClothes;
+import com.example.zara_tpv.pojo.Producto;
 
 
 import java.util.List;
 
 public class ListClothesAdapterHorizontal extends RecyclerView.Adapter<ListClothesAdapterHorizontal.ViewHolderHorizontal> {
-    private List<ListClothes> data;
+    private List<Producto> data;
     private OnItemClickListener listener;
 
     public interface OnItemClickListener {
-        void onItemClick(ListClothes item);
+        void onItemClick(Producto item);
     }
 
-    public ListClothesAdapterHorizontal(List<ListClothes> data, OnItemClickListener listener) {
+    public ListClothesAdapterHorizontal(List<Producto> data, OnItemClickListener listener) {
         this.data = data;
         this.listener = listener;
     }
@@ -44,7 +44,7 @@ public class ListClothesAdapterHorizontal extends RecyclerView.Adapter<ListCloth
         return data.size();
     }
 
-    public void filterReference(List<ListClothes> filterList) {
+    public void filterReference(List<Producto> filterList) {
         data = filterList;
         notifyDataSetChanged();
     }
@@ -58,8 +58,8 @@ public class ListClothesAdapterHorizontal extends RecyclerView.Adapter<ListCloth
             name = itemView.findViewById(R.id.textView_name_clothe_menu);
         }
 
-        public void bind(ListClothes clothe, final OnItemClickListener listener) {
-            name.setText(clothe.getName());
+        public void bind(Producto clothe, final OnItemClickListener listener) {
+            name.setText(clothe.getDescripcion());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

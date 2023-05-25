@@ -2,6 +2,7 @@ package com.example.zara_tpv.manager;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -15,10 +16,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 
 import com.example.zara_tpv.R;
+import com.example.zara_tpv.adapter.DiscountAdapter;
 import com.example.zara_tpv.adapter.ListClothesAdapter;
-import com.example.zara_tpv.pojo.ListClothes;
+import com.example.zara_tpv.pojo.Discount;
+import com.example.zara_tpv.pojo.Producto;
+import com.example.zara_tpv.windows.DiscountWindow;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.RecursiveAction;
 
 public class DialogManager {
     private Resources res;
@@ -81,7 +90,7 @@ public class DialogManager {
         dialog.show();
     }
 
-    public static void openDialogClothe(Context context, ListClothesAdapter adapter, ListClothes clothe, int position) {
+    public static void openDialogClothe(Context context, ListClothesAdapter adapter, Producto clothe, int position) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
@@ -91,7 +100,7 @@ public class DialogManager {
         final Button buttonModifyClothe = dialog.findViewById(R.id.button_modify_clothe);
         final Button buttonDeleteClothe = dialog.findViewById(R.id.button_delete_clothe);
 
-        textName.setText(clothe.getName());
+        textName.setText(clothe.getDescripcion());
 
         buttonModifyClothe.setOnClickListener((v) -> {
             dialog.dismiss();
@@ -106,7 +115,7 @@ public class DialogManager {
         dialog.show();
     }
 
-    public static void openDialogClothe(Context context, ListClothes clothe) {
+    public static void openDialogClothe(Context context, Producto clothe) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
@@ -116,7 +125,7 @@ public class DialogManager {
         final Button buttonModifyClothe = dialog.findViewById(R.id.button_modify_clothe);
         final Button buttonDeleteClothe = dialog.findViewById(R.id.button_delete_clothe);
 
-        textName.setText(clothe.getName());
+        textName.setText(clothe.getDescripcion());
 
         buttonModifyClothe.setOnClickListener((v) -> {
             dialog.dismiss();
@@ -136,7 +145,7 @@ public class DialogManager {
         dialog.setContentView(R.layout.custom_dialog_sign_in);
 
         final EditText usernameSignIn = dialog.findViewById(R.id.editText_username_sign_in);
-        final EditText passwordSignIn = dialog.findViewById(R.id.editText_password_sign_in);
+        final EditText passwordSignUp = dialog.findViewById(R.id.editText_password_sign_in);
         final Button buttonSignIn = dialog.findViewById(R.id.button_sign_in);
         final TextView textViewSignUp = dialog.findViewById(R.id.textView_sign_up);
 
@@ -147,8 +156,10 @@ public class DialogManager {
             if(!ValidatorManager.passValidationContent(usernameSignIn, context)
                     || !ValidatorManager.passValidationContent(usernameSignIn, context)) {
                 openDialogError(context, context.getResources().getString(R.string.message_error_empty_field));
+            } else {
+                Intent intent = new Intent(context, DiscountWindow.class);
+                context.startActivity(intent);
             }
-            dialog.dismiss();
         });
 
         textViewSignUp.setOnClickListener((v) -> {
@@ -176,5 +187,24 @@ public class DialogManager {
         final int start = spannableString.indexOf(target);
         final int end = start + target.length();
         spannable.setSpan(span, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+
+    public static void openDialogDiscounts(Context context) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.custom_dialog_discounts);
+
+        List<Discount> discounts = new ArrayList<>();
+        discounts.add(new Discount(1, "Descripcion 50%", 0.5));
+        discounts.add(new Discount(2, "Descripcion 25%", 0.25));
+
+        DiscountAdapter adapter = new DiscountAdapter(discounts);
+
+        final Button buttonApply = dialog.findViewById(R.id.button_apply_discount);
+
+        buttonApply.setOnClickListener((v) -> {
+            dialog.dismiss();
+        });
     }
 }

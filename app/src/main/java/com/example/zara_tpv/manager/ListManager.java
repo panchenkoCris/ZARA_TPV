@@ -2,28 +2,49 @@ package com.example.zara_tpv.manager;
 
 import android.content.Context;
 
-import com.example.zara_tpv.pojo.ListClothes;
 import com.example.zara_tpv.pojo.ListClothesNested;
+import com.example.zara_tpv.pojo.Producto;
+import com.example.zara_tpv.pojo.ProductoInterface;
+import com.example.zara_tpv.retrofit.RetrofitService;
+import com.example.zara_tpv.windows.ResumeShopWindow;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ListManager {
-    private static ArrayList<ListClothes> clothes;
+    private static Context context;
+    private static List<Producto> clothes;
+
+    public ListManager(Context context) {
+        this.context = context;
+        declareClothes();
+    }
 
     public static void declareClothes() {
         clothes = new ArrayList<>();
-        clothes.add(new ListClothes("camiseta", "39", "2.90", "Rosa"));
-        clothes.add(new ListClothes("pantalon", "34", "2.90", "Negro"));
-        clothes.add(new ListClothes("mocasinos", "38", "2.90", "Rosa"));
-        clothes.add(new ListClothes("blusa", "40", "2.90", "Negro"));
-        clothes.add(new ListClothes("chaqueta", "38", "2.90", "Rosa"));
-        clothes.add(new ListClothes("collar", "38", "2.90", "Negro"));
-        clothes.add(new ListClothes("cinturon", "37", "2.90", "Rosa"));
+        TaskGetAllProductos taskGetAllProductos = new TaskGetAllProductos(context);
+        taskGetAllProductos.iniciar();
     }
 
-    public static ArrayList<ListClothes> getCategoryClothes() {
-        declareClothes();
+    public static List<Producto> getCategoryClothes() {
+        RetrofitService retrofitService = new RetrofitService();
+        ProductoInterface productoInterface = retrofitService.getRetrofit().create(ProductoInterface.class);
+        productoInterface.getAllProductos().enqueue(new Callback<List<Producto>>() {
+            @Override
+            public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
+                clothes = response.body();
+                clothes.size();
+            }
+
+            @Override
+            public void onFailure(Call<List<Producto>> call, Throwable t) {
+
+            }
+        });
         return clothes;
     }
 
@@ -35,5 +56,13 @@ public class ListManager {
         nestedList.add(new ListClothesNested(getCategoryClothes(), "Ropa"));
         nestedList.add(new ListClothesNested(getCategoryClothes(), "Ropa"));
         return nestedList;
+    }
+
+    public static void setListProductos(ArrayList<Producto> ps) {
+        clothes = ps;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 }

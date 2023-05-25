@@ -15,9 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zara_tpv.R;
 import com.example.zara_tpv.manager.DialogManager;
-import com.example.zara_tpv.manager.ListManager;
-import com.example.zara_tpv.pojo.ListClothes;
 import com.example.zara_tpv.pojo.ListClothesNested;
+import com.example.zara_tpv.pojo.Producto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,7 @@ import java.util.List;
 public class ListClothesAdapterNested extends RecyclerView.Adapter<ListClothesAdapterNested.ItemViewHolder> {
     private ListClothesAdapterHorizontal adapterHorizontal;
     private List<ListClothesNested> data;
-    private List<ListClothes> list = new ArrayList<>();
+    private List<Producto> list = new ArrayList<>();
     private Context context;
 
     public ListClothesAdapterNested(List<ListClothesNested> data, Context context) {
@@ -52,7 +51,7 @@ public class ListClothesAdapterNested extends RecyclerView.Adapter<ListClothesAd
 
         adapterHorizontal = new ListClothesAdapterHorizontal(list, new ListClothesAdapterHorizontal.OnItemClickListener() {
             @Override
-            public void onItemClick(ListClothes clothe) {
+            public void onItemClick(Producto clothe) {
                 DialogManager.openDialogClothe(context, clothe);
             }
         });
