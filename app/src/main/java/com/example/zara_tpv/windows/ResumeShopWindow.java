@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ import android.widget.Toast;
 import com.example.zara_tpv.R;
 import com.example.zara_tpv.adapter.ListClothesAdapter;
 import com.example.zara_tpv.manager.DialogManager;
-import com.example.zara_tpv.manager.ListManager;
+import com.example.zara_tpv.manager.ProductsManager;
 import com.example.zara_tpv.pojo.Producto;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ import java.util.List;
 
 public class ResumeShopWindow extends AppCompatActivity implements View.OnClickListener {
     private static List<Producto> clothes = new ArrayList<>();
-    private ListClothesAdapter adapter;
+    private static ListClothesAdapter adapter;
     private RecyclerView recyclerView;
 
     @Override
@@ -35,13 +36,14 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resume_shop_window);
 
+        ProductsManager pm = new ProductsManager(this);
         setAdapter();
         setRecyclerView((RecyclerView) findViewById(R.id.recyclerView_clothes));
         setToolbar((Toolbar) findViewById(R.id.toolbar_menu));
         setButtons((Button) findViewById(R.id.button_openScannerCode),
                 (Button) findViewById(R.id.button_openDialogCode));
 
-        ListManager.getCategoryClothes(adapter);
+        pm.getAllProducts(adapter);
     }
 
     private void setAdapter() {
@@ -109,7 +111,7 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    public static void setClothes(List<Producto> clothes) {
-        ResumeShopWindow.clothes = clothes;
+    public static ListClothesAdapter getAdapter() {
+        return adapter;
     }
 }

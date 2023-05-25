@@ -11,6 +11,7 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.example.zara_tpv.R;
+import com.example.zara_tpv.manager.ProductsManager;
 import com.google.zxing.Result;
 
 public class ScannerWindow extends AppCompatActivity {
@@ -29,7 +30,10 @@ public class ScannerWindow extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(ScannerWindow.this, result.getText(), Toast.LENGTH_SHORT).show();
+                        int id = Integer.parseInt(result.getText());
+                        ProductsManager.getProducto(id, ResumeShopWindow.getAdapter());
+                        Toast.makeText(getApplicationContext(), "Producto añadido correctamente", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 });
             }

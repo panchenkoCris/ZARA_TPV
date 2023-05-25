@@ -69,7 +69,7 @@ public class FilterManager {
     private static void setFilterSize(String size, ListClothesAdapterNested adapter) {
         int talla = Integer.valueOf(size);
         List<Producto> list = new ArrayList<>();
-//        for (Producto item : ListManager.getCategoryClothes()) {
+//        for (Producto item : ProductsManager.getCategoryClothes()) {
 //            if (item.getTalla() == talla) {
 //                list.add(item);
 //            }
@@ -79,7 +79,7 @@ public class FilterManager {
 
     private static void setFilterColor(String color, ListClothesAdapterNested adapter) {
         List<Producto> list = new ArrayList<>();
-//        for (Producto item : ListManager.getCategoryClothes()) {
+//        for (Producto item : ProductsManager.getCategoryClothes()) {
 //            if (item.getColor().equals(color)) {
 //                list.add(item);
 //            }
@@ -95,7 +95,7 @@ public class FilterManager {
      */
     private static void setFilterReference(String nameClothe, ListClothesAdapterNested adapter) {
         List<Producto> list = new ArrayList<>();
-//        for (Producto item : ListManager.getCategoryClothes()) {
+//        for (Producto item : ProductsManager.getCategoryClothes()) {
 //            if (item.getDescripcion().equals(nameClothe)) {
 //                list.add(item);
 //            }

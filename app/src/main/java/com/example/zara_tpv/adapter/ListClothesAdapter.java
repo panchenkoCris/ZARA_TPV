@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.zara_tpv.R;
 import com.example.zara_tpv.pojo.Producto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListClothesAdapter extends RecyclerView.Adapter<ListClothesAdapter.ViewHolder> {
@@ -22,8 +23,12 @@ public class ListClothesAdapter extends RecyclerView.Adapter<ListClothesAdapter.
         void onItemClick(Producto item);
     }
 
+    public void addProducto(Producto producto) {
+        this.data.add(producto);
+    }
+
     public void setProductos(List<Producto> productos) {
-        this.data = productos;
+        this.data.addAll(productos);
     }
 
     public ListClothesAdapter(List<Producto> data, OnItemClickListener listener) {

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.example.zara_tpv.adapter.ListClothesAdapter;
 import com.example.zara_tpv.pojo.Discount;
 import com.example.zara_tpv.pojo.Producto;
 import com.example.zara_tpv.windows.DiscountWindow;
+import com.example.zara_tpv.windows.ResumeShopWindow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,16 @@ import java.util.concurrent.RecursiveAction;
 
 public class DialogManager {
     private Resources res;
+
+    public static void openProgressBar(Context context) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.custom_progress_bar);
+
+        final ProgressBar progressBar = dialog.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+    }
 
     public static void openDialogCode(Context context) {
         final Dialog dialog = new Dialog(context);
@@ -42,7 +54,8 @@ public class DialogManager {
         final Button buttonInsertBarcode = dialog.findViewById(R.id.button_insert_barcode);
 
         buttonInsertBarcode.setOnClickListener((v) -> {
-            //int barcode = Integer.parseInt(numBarcode.getText().toString());
+            int id = Integer.parseInt(numBarcode.getText().toString());
+            ProductsManager.getProducto(id, ResumeShopWindow.getAdapter());
             dialog.dismiss();
         });
 

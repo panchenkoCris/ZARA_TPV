@@ -20,7 +20,6 @@ import com.example.zara_tpv.R;
 import com.example.zara_tpv.adapter.ListClothesAdapterNested;
 import com.example.zara_tpv.manager.DialogManager;
 import com.example.zara_tpv.manager.FilterManager;
-import com.example.zara_tpv.manager.ListManager;
 import com.example.zara_tpv.pojo.ListClothesNested;
 
 import java.util.List;
@@ -72,7 +71,7 @@ public class ShopWindow extends AppCompatActivity {
     }
 
 //    private List<ListClothesNested> setListNested() {
-//        List<ListClothesNested> listNestedClothes = ListManager.getAllClothes();
+//        List<ListClothesNested> listNestedClothes = ProductsManager.getAllClothes();
 //        return listNestedClothes;
 //    }
 
