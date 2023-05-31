@@ -25,10 +25,10 @@
     <string name="textView_title_resume">Shop list</string>
     <string name="textView_pay_clothes">Pay the purchase</string>
     <string name="textView_title_dialog_code">Insert barcode</string>
-    <string name="textView_title_view_clothe">Visualise garment from cart</string>
+    <string name="textView_title_view_clothe">Visualise garment</string>
     <string name="textView_text_dialog_code">Insert the numbers from the barcode</string>
     <string name="button_delete_clothe">Delete</string>
-    <string name="button_modify_clothe">Modify</string>
+    <string name="button_take_out_clothe">Take out from warehouse</string>
     <string name="button_insert_barcode">Insert code</string>
     <string name="editText_num_barcode">Barcode</string>
     <string name="message_delete_clothe">Deleted garment</string>
@@ -74,4 +74,6 @@
     <string name="textView_title_discount">Available discounts</string>
     <string name="button_apply_discount">Apply</string>
 
+    <string name="message_warehouse">Product requested correctly</string>
+    <string name="button_add_cart">Add to cart</string>
 </resources>

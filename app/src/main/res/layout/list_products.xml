@@ -7,9 +7,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv"
-        android:layout_width="599dp"
+        android:layout_width="659dp"
         android:layout_height="166dp"
-        android:layout_marginLeft="150dp"
+        android:layout_marginLeft="100dp"
         android:layout_marginTop="10dp"
         android:animateLayoutChanges="true"
         app:cardCornerRadius="10dp"
@@ -32,50 +32,48 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="124dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView_title_name_clothe"
-                    android:layout_width="154dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:text="@string/textView_title_name_clothe"
-                    android:textAlignment="viewEnd"
+                    android:textAlignment="center"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView_title_size_clothe"
-                    android:layout_width="113dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginLeft="40dp"
                     android:text="@string/textView_title_size_clothe"
-                    android:textAlignment="viewEnd"
+                    android:textAlignment="center"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView_title_price_clothe"
-                    android:layout_width="113dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginLeft="40dp"
                     android:text="@string/textView_title_price_clothe"
-                    android:textAlignment="viewEnd"
+                    android:textAlignment="center"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="210dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
@@ -83,33 +81,31 @@
 
                 <TextView
                     android:id="@+id/textView_name_clothe"
-                    android:layout_width="154dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:textAlignment="viewEnd"
                     android:text=""
+                    android:textAlignment="viewStart"
                     android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textView_size_clothe"
-                    android:layout_width="113dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginLeft="40dp"
-                    android:textAlignment="viewEnd"
+                    android:textAlignment="viewStart"
                     android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textView_price_clothe"
-                    android:layout_width="113dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginLeft="40dp"
-                    android:textAlignment="viewEnd"
+                    android:textAlignment="viewStart"
                     android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>

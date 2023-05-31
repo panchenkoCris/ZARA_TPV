@@ -32,7 +32,6 @@ public class ScannerWindow extends AppCompatActivity {
                     public void run() {
                         int id = Integer.parseInt(result.getText());
                         ProductsManager.getProducto(id, ResumeShopWindow.getAdapter());
-                        Toast.makeText(getApplicationContext(), "Producto añadido correctamente", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });

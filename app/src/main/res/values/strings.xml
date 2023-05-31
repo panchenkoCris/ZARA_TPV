@@ -24,10 +24,10 @@
     <string name="textView_pay_clothes">Pagar la compra</string>
     <string name="textView_title_resume">Lista compra</string>
     <string name="textView_title_dialog_code">Insertar código de barras</string>
-    <string name="textView_title_view_clothe">Visualizar prenda del carrito</string>
+    <string name="textView_title_view_clothe">Visualizar prenda</string>
     <string name="textView_text_dialog_code">Inserte los número del código de barras</string>
     <string name="button_delete_clothe">Eliminar</string>
-    <string name="button_modify_clothe">Modificar</string>
+    <string name="button_take_out_clothe">Sacar de almacén</string>
     <string name="button_insert_barcode">Insertar código</string>
     <string name="editText_num_barcode">Código de barras</string>
     <string name="message_delete_clothe">Prenda eliminada</string>
@@ -72,5 +72,8 @@
     <!-- Elementos del dialog 'custom_error_dialog' -->
     <string name="textView_title_discount">Descuentos disponibles</string>
     <string name="button_apply_discount">Aplicar</string>
+
+    <string name="message_warehouse">Producto solicitado correctamente</string>
+    <string name="button_add_cart">Añadir al carrito</string>
 
 </resources>

@@ -4,19 +4,20 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:layout_margin="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="10dp"
     app:cardCornerRadius="10dp">
 
     <LinearLayout
-        android:layout_width="274dp"
-        android:layout_height="278dp"
-        android:orientation="vertical">
+        android:layout_width="392dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/imageView_clothe_menu"
             android:layout_width="match_parent"
-            android:layout_height="253dp"
+            android:layout_height="300dp"
             app:srcCompat="@drawable/icon_styler" />
 
         <LinearLayout
@@ -28,12 +29,15 @@
                 android:id="@+id/textView_title_name_clothe_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:padding="10dp"
                 android:text="@string/textView_title_name_clothe" />
 
             <TextView
                 android:id="@+id/textView_name_clothe_menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:textAlignment="center" />
         </LinearLayout>
     </LinearLayout>

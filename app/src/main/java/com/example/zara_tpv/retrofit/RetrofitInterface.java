@@ -1,6 +1,8 @@
 package com.example.zara_tpv.retrofit;
 
+import com.example.zara_tpv.pojo.Discount;
 import com.example.zara_tpv.pojo.Producto;
+import com.example.zara_tpv.pojo.Type;
 
 import java.util.List;
 
@@ -21,4 +23,10 @@ public interface RetrofitInterface {
 
     @POST("producto/create")
     Call<Producto> create(@Body Producto producto);
+
+    @GET("tipo")
+    Call<List<Type>> getAllTypes();
+
+    @GET("descuento")
+    Call<List<Discount>> getAllDiscounts();
 }

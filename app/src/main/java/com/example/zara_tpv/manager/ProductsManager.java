@@ -1,8 +1,9 @@
 package com.example.zara_tpv.manager;
 
 import android.content.Context;
+import android.widget.Toast;
 
-import com.example.zara_tpv.adapter.ListClothesAdapter;
+import com.example.zara_tpv.adapter.ListProductsAdapter;
 import com.example.zara_tpv.pojo.Producto;
 import com.example.zara_tpv.retrofit.RetrofitInterface;
 import com.example.zara_tpv.retrofit.RetrofitService;
@@ -23,8 +24,7 @@ public class ProductsManager {
         clothes = new ArrayList<>();
     }
 
-    public void getAllProducts(ListClothesAdapter adapter) {
-        DialogManager.openProgressBar(context);
+    public void getAllProducts(ListProductsAdapter adapter) {
         RetrofitService retrofitService = new RetrofitService();
         RetrofitInterface productoInterface = retrofitService.getRetrofit().create(RetrofitInterface.class);
         productoInterface.getAllProductos().enqueue(new Callback<List<Producto>>() {
@@ -42,20 +42,24 @@ public class ProductsManager {
         });
     }
 
-    public static void getProducto(int id, ListClothesAdapter adapter) {
+    public static void getProducto(int id, ListProductsAdapter adapter) {
         RetrofitService retrofitService = new RetrofitService();
         RetrofitInterface productoInterface = retrofitService.getRetrofit().create(RetrofitInterface.class);
         productoInterface.getProducto(id).enqueue(new Callback<Producto>() {
             @Override
             public void onResponse(Call<Producto> call, Response<Producto> response) {
                 Producto producto = response.body();
-                adapter.addProducto(producto);
-                adapter.notifyDataSetChanged();
+                if(producto.getCb_producto() != 0) {
+                    adapter.addProducto(producto);
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(context, "Producto añadido correctamente", Toast.LENGTH_SHORT).show();
+                } else {
+                    DialogManager.openDialogError(context, "El código insertado no se encuentra registrado en nuestra base");
+                }
             }
 
             @Override
             public void onFailure(Call<Producto> call, Throwable t) {
-
             }
         });
     }

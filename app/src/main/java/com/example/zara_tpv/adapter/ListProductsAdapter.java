@@ -10,14 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zara_tpv.R;
+import com.example.zara_tpv.manager.TypesManager;
 import com.example.zara_tpv.pojo.Producto;
+import com.example.zara_tpv.pojo.Type;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class ListClothesAdapter extends RecyclerView.Adapter<ListClothesAdapter.ViewHolder> {
+public class ListProductsAdapter extends RecyclerView.Adapter<ListProductsAdapter.ViewHolder> {
     private List<Producto> data;
     private final OnItemClickListener listener;
+    private boolean windowIsShop;
+
+    public void filterReference(List<Producto> list) {
+    }
 
     public interface OnItemClickListener {
         void onItemClick(Producto item);
@@ -31,20 +36,23 @@ public class ListClothesAdapter extends RecyclerView.Adapter<ListClothesAdapter.
         this.data.addAll(productos);
     }
 
-    public ListClothesAdapter(List<Producto> data, OnItemClickListener listener) {
+    public ListProductsAdapter(List<Producto> data, boolean windowIsShop,OnItemClickListener listener) {
         this.data = data;
+        this.windowIsShop = windowIsShop;
         this.listener = listener;
     }
 
     @NonNull
     @Override
-    public ListClothesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_clothes, parent,false);
+    public ListProductsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = (windowIsShop) ?
+                LayoutInflater.from(parent.getContext()).inflate(R.layout.list_products_shop, parent,false) :
+                LayoutInflater.from(parent.getContext()).inflate(R.layout.list_products, parent,false);
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListClothesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListProductsAdapter.ViewHolder holder, int position) {
         holder.bind(data.get(position), listener);
     }
 
@@ -65,16 +73,24 @@ public class ListClothesAdapter extends RecyclerView.Adapter<ListClothesAdapter.
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            iconImage = itemView.findViewById(R.id.imageView_clothe);
-            name = itemView.findViewById(R.id.textView_name_clothe);
-            size = itemView.findViewById(R.id.textView_size_clothe);
-            price = itemView.findViewById(R.id.textView_price_clothe);
+            if(!windowIsShop) {
+                iconImage = itemView.findViewById(R.id.imageView_clothe);
+                name = itemView.findViewById(R.id.textView_name_clothe);
+                size = itemView.findViewById(R.id.textView_size_clothe);
+                price = itemView.findViewById(R.id.textView_price_clothe);
+            } else {
+                name = itemView.findViewById(R.id.textView_name_clothe_menu);
+            }
         }
 
         public void bind(Producto producto, final OnItemClickListener listener) {
-            name.setText(producto.getDescripcion());
-            size.setText(String.valueOf(producto.getTalla()));
-            price.setText(String.valueOf((int) producto.getPrecio()));
+            if(!windowIsShop) {
+                size.setText(String.valueOf(producto.getTalla()));
+                price.setText(String.valueOf((int) producto.getPrecio()));
+            }
+
+            Type type = TypesManager.getOneType(producto.getId_tipo());
+            name.setText(type.getNombre_tipo()+" "+((type.getLongitud_tipo()!=null) ? type.getLongitud_tipo() : producto.getColor()));
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

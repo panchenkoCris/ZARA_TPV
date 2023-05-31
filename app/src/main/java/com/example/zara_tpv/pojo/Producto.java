@@ -1,5 +1,8 @@
 package com.example.zara_tpv.pojo;
 
+import android.widget.ImageView;
+
+import com.example.zara_tpv.manager.TypesManager;
 import com.google.gson.annotations.SerializedName;
 
 public class Producto {
@@ -20,14 +23,16 @@ public class Producto {
     @SerializedName("id_categoria")
     private int id_categoria;
 
-    public Producto(int cb_producto, int existencias, double precio, int talla, String color, String descripcion, int id_tipo, int id_categoria) {
+    public Producto(int cb_producto, int existencias,
+                    double precio, int talla,
+                    String color, String descripcion,
+                    int id_tipo, int id_categoria) {
         this.cb_producto = cb_producto;
         this.existencias = existencias;
         this.precio = precio;
         this.talla = talla;
         this.color = color;
         this.descripcion = descripcion;
-        this.id_tipo = id_tipo;
         this.id_categoria = id_categoria;
     }
 

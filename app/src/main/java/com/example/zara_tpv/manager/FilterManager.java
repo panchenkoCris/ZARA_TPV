@@ -4,12 +4,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.zara_tpv.adapter.ListClothesAdapterNested;
-import com.example.zara_tpv.pojo.ListClothes;
+import com.example.zara_tpv.adapter.ListProductsAdapter;
 import com.example.zara_tpv.pojo.Producto;
 
 import java.util.ArrayList;
@@ -22,7 +20,7 @@ public class FilterManager {
      * @param editT
      * @param adapter
      */
-    public static void setFilter(EditText editT, ListClothesAdapterNested adapter) {
+    public static void setFilter(EditText editT, ListProductsAdapter adapter) {
         editT.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -48,7 +46,7 @@ public class FilterManager {
      * @param adapter
      */
 
-    public static void setFilterS(Spinner spin, ListClothesAdapterNested adapter, boolean isColor) {
+    public static void setFilterS(Spinner spin, ListProductsAdapter adapter, boolean isColor) {
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -66,7 +64,7 @@ public class FilterManager {
         });
     }
 
-    private static void setFilterSize(String size, ListClothesAdapterNested adapter) {
+    private static void setFilterSize(String size, ListProductsAdapter adapter) {
         int talla = Integer.valueOf(size);
         List<Producto> list = new ArrayList<>();
 //        for (Producto item : ProductsManager.getCategoryClothes()) {
@@ -74,17 +72,17 @@ public class FilterManager {
 //                list.add(item);
 //            }
 //        }
-        adapter.getAdapterHorizontal().filterReference(list);
+//        adapter.filterReference(list);
     }
 
-    private static void setFilterColor(String color, ListClothesAdapterNested adapter) {
+    private static void setFilterColor(String color, ListProductsAdapter adapter) {
         List<Producto> list = new ArrayList<>();
 //        for (Producto item : ProductsManager.getCategoryClothes()) {
 //            if (item.getColor().equals(color)) {
 //                list.add(item);
 //            }
 //        }
-        adapter.getAdapterHorizontal().filterReference(list);
+        adapter.filterReference(list);
     }
 
     /**
@@ -93,14 +91,14 @@ public class FilterManager {
      * @param nameClothe
      * @param adapter
      */
-    private static void setFilterReference(String nameClothe, ListClothesAdapterNested adapter) {
+    private static void setFilterReference(String nameClothe, ListProductsAdapter adapter) {
         List<Producto> list = new ArrayList<>();
 //        for (Producto item : ProductsManager.getCategoryClothes()) {
 //            if (item.getDescripcion().equals(nameClothe)) {
 //                list.add(item);
 //            }
 //        }
-        adapter.getAdapterHorizontal().filterReference(list);
+//        adapter.getAdapterHorizontal().filterReference(list);
     }
 
 

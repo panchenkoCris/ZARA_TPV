@@ -4,7 +4,6 @@ public class Discount {
     private int id;
     private String descripcion;
     private double cantidad_descuento;
-
     public Discount(int id, String descripcion, double cantidad_descuento) {
         this.id = id;
         this.descripcion = descripcion;

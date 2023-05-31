@@ -17,19 +17,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
 
 import com.example.zara_tpv.R;
 import com.example.zara_tpv.adapter.DiscountAdapter;
-import com.example.zara_tpv.adapter.ListClothesAdapter;
+import com.example.zara_tpv.adapter.ListProductsAdapter;
 import com.example.zara_tpv.pojo.Discount;
 import com.example.zara_tpv.pojo.Producto;
+import com.example.zara_tpv.pojo.Type;
 import com.example.zara_tpv.windows.DiscountWindow;
 import com.example.zara_tpv.windows.ResumeShopWindow;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.RecursiveAction;
 
 public class DialogManager {
     private Resources res;
@@ -54,9 +53,13 @@ public class DialogManager {
         final Button buttonInsertBarcode = dialog.findViewById(R.id.button_insert_barcode);
 
         buttonInsertBarcode.setOnClickListener((v) -> {
-            int id = Integer.parseInt(numBarcode.getText().toString());
-            ProductsManager.getProducto(id, ResumeShopWindow.getAdapter());
-            dialog.dismiss();
+            try {
+                int id = Integer.parseInt(numBarcode.getText().toString());
+                ProductsManager.getProducto(id, ResumeShopWindow.getAdapter());
+                dialog.dismiss();
+            } catch (NumberFormatException ex) {
+                Toast.makeText(context, "Solo se pueden insertar números", Toast.LENGTH_SHORT).show();
+            }
         });
 
         dialog.show();
@@ -103,48 +106,69 @@ public class DialogManager {
         dialog.show();
     }
 
-    public static void openDialogClothe(Context context, ListClothesAdapter adapter, Producto clothe, int position) {
+    public static void openDialogClotheTakeOut(Context context, ListProductsAdapter adapter, Producto clothe) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
-        dialog.setContentView(R.layout.custom_dialog_clothe);
+        dialog.setContentView(R.layout.custom_dialog_clothe_warehouse);
 
-        final TextView textName = dialog.findViewById(R.id.textView_title_name_clothe);
-        final Button buttonModifyClothe = dialog.findViewById(R.id.button_modify_clothe);
-        final Button buttonDeleteClothe = dialog.findViewById(R.id.button_delete_clothe);
+        final TextView textTitleName = dialog.findViewById(R.id.textView_title_name_clothe);
+        final TextView textTitleSize = dialog.findViewById(R.id.textView_title_size_clothe);
+        final TextView textTitleColor = dialog.findViewById(R.id.textView_title_color_clothe);
 
-        textName.setText(clothe.getDescripcion());
+        final TextView textSize = dialog.findViewById(R.id.textView_size_clothe_dialog);
+        final TextView textColor = dialog.findViewById(R.id.textView_color_clothe_dialog);
 
-        buttonModifyClothe.setOnClickListener((v) -> {
+        final Button buttonTakeOutClothe = dialog.findViewById(R.id.button_take_out_clothe);
+
+        Type type = TypesManager.getOneType(clothe.getId_tipo());
+        textTitleName.setText(type.getNombre_tipo()+" "+((type.getLongitud_tipo()!=null) ? type.getLongitud_tipo() : clothe.getColor()));
+        textTitleSize.setText(context.getString(R.string.textView_title_size_clothe));
+        textTitleColor.setText(context.getString(R.string.textView_title_color_clothe));
+
+        textSize.setText(String.valueOf(clothe.getTalla()));
+        textColor.setText(clothe.getColor());
+
+        buttonTakeOutClothe.setOnClickListener((v) -> {
+            Toast.makeText(context, R.string.message_warehouse, Toast.LENGTH_SHORT).show();
             dialog.dismiss();
         });
 
-        buttonDeleteClothe.setOnClickListener((v) -> {
-            adapter.removeItem(position);
-            Toast.makeText(context, context.getString(R.string.message_delete_clothe), Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
-        });
+//        buttonDeleteClothe.setOnClickListener((v) -> {
+//            adapter.removeItem(position);
+//            Toast.makeText(context, context.getString(R.string.message_delete_clothe), Toast.LENGTH_SHORT).show();
+//            dialog.dismiss();
+//        });
 
         dialog.show();
     }
 
-    public static void openDialogClothe(Context context, Producto clothe) {
+    public static void openDialogClotheResume(Context context, ListProductsAdapter adapter, Producto clothe, int position) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
-        dialog.setContentView(R.layout.custom_dialog_clothe);
+        dialog.setContentView(R.layout.custom_dialog_clothe_resume);
 
-        final TextView textName = dialog.findViewById(R.id.textView_title_name_clothe);
-        final Button buttonModifyClothe = dialog.findViewById(R.id.button_modify_clothe);
+        final TextView textTitleName = dialog.findViewById(R.id.textView_title_name_clothe);
+        final TextView textTitleSize = dialog.findViewById(R.id.textView_title_size_clothe);
+        final TextView textTitleColor = dialog.findViewById(R.id.textView_title_color_clothe);
+
+        final TextView textSize = dialog.findViewById(R.id.textView_size_clothe_dialog);
+        final TextView textColor = dialog.findViewById(R.id.textView_color_clothe_dialog);
+
         final Button buttonDeleteClothe = dialog.findViewById(R.id.button_delete_clothe);
 
-        textName.setText(clothe.getDescripcion());
+        Type type = TypesManager.getOneType(clothe.getId_tipo());
+        textTitleName.setText(type.getNombre_tipo()+" "+type.getLongitud_tipo());
+        textTitleSize.setText(context.getString(R.string.textView_title_size_clothe));
+        textTitleColor.setText(context.getString(R.string.textView_title_color_clothe));
 
-        buttonModifyClothe.setOnClickListener((v) -> {
-            dialog.dismiss();
-        });
+        textSize.setText(String.valueOf(clothe.getTalla()));
+        textColor.setText(clothe.getColor());
 
         buttonDeleteClothe.setOnClickListener((v) -> {
+            adapter.removeItem(position);
+            Toast.makeText(context, context.getString(R.string.message_delete_clothe), Toast.LENGTH_SHORT).show();
             dialog.dismiss();
         });
 
@@ -208,11 +232,7 @@ public class DialogManager {
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.custom_dialog_discounts);
 
-        List<Discount> discounts = new ArrayList<>();
-        discounts.add(new Discount(1, "Descripcion 50%", 0.5));
-        discounts.add(new Discount(2, "Descripcion 25%", 0.25));
-
-        DiscountAdapter adapter = new DiscountAdapter(discounts);
+        DiscountsManager dm = new DiscountsManager();
 
         final Button buttonApply = dialog.findViewById(R.id.button_apply_discount);
 

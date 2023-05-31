@@ -6,7 +6,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -17,9 +16,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.zara_tpv.R;
-import com.example.zara_tpv.adapter.ListClothesAdapter;
+import com.example.zara_tpv.adapter.ListProductsAdapter;
 import com.example.zara_tpv.manager.DialogManager;
 import com.example.zara_tpv.manager.ProductsManager;
+import com.example.zara_tpv.manager.TypesManager;
 import com.example.zara_tpv.pojo.Producto;
 
 import java.util.ArrayList;
@@ -28,8 +28,7 @@ import java.util.List;
 
 public class ResumeShopWindow extends AppCompatActivity implements View.OnClickListener {
     private static List<Producto> clothes = new ArrayList<>();
-    private static ListClothesAdapter adapter;
-    private RecyclerView recyclerView;
+    private static ListProductsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +36,19 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.resume_shop_window);
 
         ProductsManager pm = new ProductsManager(this);
+        TypesManager tm = new TypesManager();
         setAdapter();
         setRecyclerView((RecyclerView) findViewById(R.id.recyclerView_clothes));
         setToolbar((Toolbar) findViewById(R.id.toolbar_menu));
         setButtons((Button) findViewById(R.id.button_openScannerCode),
                 (Button) findViewById(R.id.button_openDialogCode));
-
-        pm.getAllProducts(adapter);
     }
 
     private void setAdapter() {
-        adapter =  new ListClothesAdapter(clothes, new ListClothesAdapter.OnItemClickListener() {
+        adapter =  new ListProductsAdapter(clothes, false, new ListProductsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Producto clothe) {
-                DialogManager.openDialogClothe(ResumeShopWindow.this, adapter, clothe, clothes.indexOf(clothe));
+                DialogManager.openDialogClotheResume(ResumeShopWindow.this, adapter, clothe, clothes.indexOf(clothe));
             }
         });
     }
@@ -111,7 +109,7 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    public static ListClothesAdapter getAdapter() {
+    public static ListProductsAdapter getAdapter() {
         return adapter;
     }
 }

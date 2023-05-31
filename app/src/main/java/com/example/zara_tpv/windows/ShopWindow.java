@@ -5,29 +5,29 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.zara_tpv.R;
-import com.example.zara_tpv.adapter.ListClothesAdapterNested;
+import com.example.zara_tpv.adapter.ListProductsAdapter;
 import com.example.zara_tpv.manager.DialogManager;
-import com.example.zara_tpv.manager.FilterManager;
-import com.example.zara_tpv.pojo.ListClothesNested;
+import com.example.zara_tpv.manager.ProductsManager;
+import com.example.zara_tpv.pojo.Producto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShopWindow extends AppCompatActivity {
-    private RecyclerView recyclerViewMenu;
-    private List<ListClothesNested> listNestedClothes;
-    private ListClothesAdapterNested adapter;
+    private static List<Producto> clothes = new ArrayList<>();
+    private ListProductsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,58 +35,54 @@ public class ShopWindow extends AppCompatActivity {
         setContentView(R.layout.shop_window);
         setToolbar((Toolbar) findViewById(R.id.toolbar_menu));
 
+        ProductsManager pm = new ProductsManager(this);
+        setAdapter();
         setRecyclerView((RecyclerView) findViewById(R.id.recyclerview_menu_clothes));
-//        listNestedClothes = setListNested();
-
-        adapter = setAdapter();
         setSpinner((Spinner) findViewById(R.id.spinner_filter_size));
         setSpinner((Spinner) findViewById(R.id.spinner_filter_color));
         setEditTextSearch((EditText) findViewById(R.id.editText_filter_name));
+        pm.getAllProducts(adapter);
     }
 
     private void setEditTextSearch(EditText editT) {
-        FilterManager.setFilter(editT, adapter);
+//        FilterManager.setFilter(editT, adapter);
     }
 
     private void setSpinner(Spinner spin) {
-        boolean isSpinnerColor = (spin.getId() == R.id.spinner_filter_color);
-
-        setArrayAdapter(isSpinnerColor, spin);
-        FilterManager.setFilterS(spin, adapter, isSpinnerColor);
+//        boolean isSpinnerColor = (spin.getId() == R.id.spinner_filter_color);
+//
+//        setArrayAdapter(isSpinnerColor, spin);
+//        FilterManager.setFilterS(spin, adapter, isSpinnerColor);
     }
 
     private void setArrayAdapter(boolean isSpinnerColor, Spinner spinner) {
-        ArrayAdapter<CharSequence> adapterS;
-
-        adapterS = (isSpinnerColor) ?
-                ArrayAdapter.createFromResource(this,
-                        R.array.attributes_colors,
-                        android.R.layout.simple_spinner_item) :
-                ArrayAdapter.createFromResource(this,
-                        R.array.attributes_sizes,
-                        android.R.layout.simple_spinner_item);
-
-        adapterS.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapterS);
+//        ArrayAdapter<CharSequence> adapterS;
+//
+//        adapterS = (isSpinnerColor) ?
+//                ArrayAdapter.createFromResource(this,
+//                        R.array.attributes_colors,
+//                        android.R.layout.simple_spinner_item) :
+//                ArrayAdapter.createFromResource(this,
+//                        R.array.attributes_sizes,
+//                        android.R.layout.simple_spinner_item);
+//
+//        adapterS.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(adapterS);
     }
 
-//    private List<ListClothesNested> setListNested() {
-//        List<ListClothesNested> listNestedClothes = ProductsManager.getAllClothes();
-//        return listNestedClothes;
-//    }
-
-    private ListClothesAdapterNested setAdapter() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ShopWindow.this, LinearLayoutManager.VERTICAL, false);
-        ListClothesAdapterNested adapter = new ListClothesAdapterNested(listNestedClothes, ShopWindow.this);
-        recyclerViewMenu.setLayoutManager(linearLayoutManager);
-        recyclerViewMenu.setAdapter(adapter);
-        return adapter;
+    private void setAdapter() {
+        adapter =  new ListProductsAdapter(clothes, true, new ListProductsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Producto clothe) {
+                DialogManager.openDialogClotheTakeOut(ShopWindow.this, adapter, clothe);
+            }
+        });
     }
 
     private void setRecyclerView(RecyclerView recyclerView) {
-        recyclerViewMenu = recyclerView;
-        recyclerViewMenu.setHasFixedSize(true);
-        recyclerViewMenu.setLayoutManager((new LinearLayoutManager(this)));
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+        recyclerView.setAdapter(adapter);
     }
 
     private void setToolbar(Toolbar toolbar) {
