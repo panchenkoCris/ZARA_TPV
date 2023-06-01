@@ -16,7 +16,7 @@
     </string>
     <string name="button_qrscanner_code">Scanner</string>
     <string name="button_dialog_code">Keyboard</string>
-    <string name="textView_title_name_clothe">Name</string>
+    <string name="textView_title_name_clothe">Name:</string>
     <string name="textView_title_size_clothe">Size</string>
     <string name="textView_title_price_clothe">Price</string>
     <string name="textView_title_color_clothe">Color</string>
@@ -36,12 +36,12 @@
     <!-- Elementos del dialog 'custom_dialog_sign_in && custom_dialog_sign_up -->
     <string name="textView_title_sign_in">Login</string>
     <string name="textView_title_repeat_password">Confirm password</string>
-    <string name="textView_title_username">User</string>
+    <string name="textView_title_username">user</string>
     <string name="textView_title_password">Password</string>
     <string name="textView_title_sign_up">Sign up</string>
     <string name="textView_sign_up">Don\'t have an account? Register now</string>
     <string name="textView_title_telephone">Telephone</string>
-    <string name="textView_title_email">Gmail</string>
+    <string name="textView_title_email">Email</string>
     <string name="editText_username">Insert your identification</string>
     <string name="editText_password">Insert your password</string>
     <string name="editText_telephone_sign_up">Insert your number</string>

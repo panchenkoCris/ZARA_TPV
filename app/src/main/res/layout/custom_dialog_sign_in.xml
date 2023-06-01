@@ -47,12 +47,12 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="41dp"
             android:layout_marginTop="22dp"
-            android:text="@string/textView_title_username"
+            android:text="@string/textView_title_email"
             android:textAlignment="center"
             android:textSize="25dp" />
 
         <EditText
-            android:id="@+id/editText_username_sign_in"
+            android:id="@+id/editText_email_sign_in"
             android:layout_width="342dp"
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
@@ -64,7 +64,7 @@
             android:layout_marginBottom="16dp"
             android:layout_toEndOf="@+id/textView_title_username_sign_in"
             android:ems="10"
-            android:hint="@string/editText_username"
+            android:hint="@string/editText_email_sign_up"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:textSize="25dp" />

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.zara_tpv.adapter.ListProductsAdapter;
+import com.example.zara_tpv.adapter.ListProductsShopAdapter;
 import com.example.zara_tpv.pojo.Producto;
 import com.example.zara_tpv.retrofit.RetrofitInterface;
 import com.example.zara_tpv.retrofit.RetrofitService;
@@ -24,7 +25,7 @@ public class ProductsManager {
         clothes = new ArrayList<>();
     }
 
-    public void getAllProducts(ListProductsAdapter adapter) {
+    public void getAllProducts(ListProductsShopAdapter adapter) {
         RetrofitService retrofitService = new RetrofitService();
         RetrofitInterface productoInterface = retrofitService.getRetrofit().create(RetrofitInterface.class);
         productoInterface.getAllProductos().enqueue(new Callback<List<Producto>>() {
@@ -66,5 +67,9 @@ public class ProductsManager {
 
     public void setContext(Context context) {
         this.context = context;
+    }
+
+    public static List<Producto> getClothes() {
+        return clothes;
     }
 }

@@ -18,8 +18,6 @@ import android.widget.Toast;
 import com.example.zara_tpv.R;
 import com.example.zara_tpv.adapter.ListProductsAdapter;
 import com.example.zara_tpv.manager.DialogManager;
-import com.example.zara_tpv.manager.ProductsManager;
-import com.example.zara_tpv.manager.TypesManager;
 import com.example.zara_tpv.pojo.Producto;
 
 import java.util.ArrayList;
@@ -35,13 +33,12 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resume_shop_window);
 
-        ProductsManager pm = new ProductsManager(this);
-        TypesManager tm = new TypesManager();
         setAdapter();
         setRecyclerView((RecyclerView) findViewById(R.id.recyclerView_clothes));
         setToolbar((Toolbar) findViewById(R.id.toolbar_menu));
         setButtons((Button) findViewById(R.id.button_openScannerCode),
-                (Button) findViewById(R.id.button_openDialogCode));
+                (Button) findViewById(R.id.button_openDialogCode),
+                (Button) findViewById(R.id.button_payClothes));
     }
 
     private void setAdapter() {
@@ -53,9 +50,10 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         });
     }
 
-    private void setButtons(Button openDialog, Button openScanner) {
+    private void setButtons(Button openDialog, Button openScanner, Button payCart) {
         openDialog.setOnClickListener(this);
         openScanner.setOnClickListener(this);
+        payCart.setOnClickListener(this);
     }
 
     private void setToolbar(Toolbar toolbar) {
@@ -105,6 +103,10 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.button_openScannerCode:
                 startActivity(new Intent(this, ScannerWindow.class));
+                break;
+            case R.id.button_payClothes:
+                //startActivity(new Intent(this, PayWindow.class));
+                DialogManager.openDialogPayCredit(this);
                 break;
         }
     }

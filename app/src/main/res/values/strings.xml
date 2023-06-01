@@ -15,7 +15,7 @@
     </string>
     <string name="button_qrscanner_code">Escáner</string>
     <string name="button_dialog_code">Teclado</string>
-    <string name="textView_title_name_clothe">Nombre</string>
+    <string name="textView_title_name_clothe">Nombre:</string>
     <string name="textView_title_size_clothe">Talla</string>
     <string name="textView_title_price_clothe">Precio</string>
     <string name="textView_title_color_clothe">Color</string>
@@ -38,7 +38,7 @@
     <string name="textView_title_password">Contraseña</string>
     <string name="textView_title_sign_up">Registrar</string>
     <string name="textView_title_telephone">Télefono</string>
-    <string name="textView_title_email">Gmail</string>
+    <string name="textView_title_email">Email</string>
     <string name="textView_sign_up">¿No tienes una cuenta? Registrate ahora</string>
     <string name="textView_title_repeat_password">Confirmar contraseña</string>
     <string name="editText_username">Inserte su dni</string>

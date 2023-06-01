@@ -12,31 +12,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.zara_tpv.R;
 import com.example.zara_tpv.manager.TicketManager;
 import com.example.zara_tpv.manager.TypesManager;
-import com.example.zara_tpv.pojo.LineaTicket;
 import com.example.zara_tpv.pojo.Producto;
 import com.example.zara_tpv.pojo.Type;
 
 import java.util.List;
 
-public class ListProductsAdapter extends RecyclerView.Adapter<ListProductsAdapter.ViewHolder> {
+public class ListProductsShopAdapter extends RecyclerView.Adapter<ListProductsShopAdapter.ViewHolder> {
     private static List<Producto> data;
     private final OnItemClickListener listener;
     private boolean windowIsShop;
 
-    public interface OnItemClickListener {
-        void onItemClick(Producto item);
+    public void setFilteredList(List<Producto> listFiltered) {
+        this.data = listFiltered;
+        notifyDataSetChanged();
     }
 
-    public static void addProducto(Producto producto) {
-        data.add(producto);
-        TicketManager.addLineTicket(producto);
+    public interface OnItemClickListener {
+        void onItemClick(Producto item);
     }
 
     public void setProductos(List<Producto> productos) {
         this.data.addAll(productos);
     }
 
-    public ListProductsAdapter(List<Producto> data, boolean windowIsShop,OnItemClickListener listener) {
+    public ListProductsShopAdapter(List<Producto> data, boolean windowIsShop, OnItemClickListener listener) {
         this.data = data;
         this.windowIsShop = windowIsShop;
         this.listener = listener;
@@ -44,7 +43,7 @@ public class ListProductsAdapter extends RecyclerView.Adapter<ListProductsAdapte
 
     @NonNull
     @Override
-    public ListProductsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ListProductsShopAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = (windowIsShop) ?
                 LayoutInflater.from(parent.getContext()).inflate(R.layout.list_products_shop, parent,false) :
                 LayoutInflater.from(parent.getContext()).inflate(R.layout.list_products, parent,false);
@@ -52,7 +51,7 @@ public class ListProductsAdapter extends RecyclerView.Adapter<ListProductsAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListProductsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListProductsShopAdapter.ViewHolder holder, int position) {
         holder.bind(data.get(position), listener);
     }
 

@@ -43,7 +43,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/editText_filter_name"
+                android:id="@+id/searchView_filter_name"
                 android:layout_width="597dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
@@ -57,12 +57,14 @@
                 android:inputType="textPersonName"
                 android:padding="5dp"
                 android:textSize="12sp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.173"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_menu"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"/>
 
             <Spinner
                 android:id="@+id/spinner_filter_color"
@@ -98,6 +100,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText_filter_name" />
+            app:layout_constraintTop_toBottomOf="@+id/searchView_filter_name" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

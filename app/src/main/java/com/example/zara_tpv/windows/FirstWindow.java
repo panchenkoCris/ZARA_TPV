@@ -1,23 +1,25 @@
 package com.example.zara_tpv.windows;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.view.View;
 import android.widget.VideoView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.util.DisplayMetrics;
 
 import com.example.zara_tpv.R;
+import com.example.zara_tpv.manager.ProductsManager;
+import com.example.zara_tpv.manager.TicketManager;
+import com.example.zara_tpv.manager.TypesManager;
+import com.example.zara_tpv.pojo.Ticket;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class FirstWindow extends AppCompatActivity implements View.OnClickListener {
@@ -27,6 +29,15 @@ public class FirstWindow extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.first_window);
+
+        ProductsManager pm = new ProductsManager(this);
+        TypesManager tm = new TypesManager();
+
+        Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM_dd", Locale.getDefault());
+        String dateFormatted = df.format(date);
+
+        TicketManager ticketManager = new TicketManager(new Ticket(dateFormatted, 0));
 
         vv = (VideoView) findViewById(R.id.videoView);
         Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.initial_video);

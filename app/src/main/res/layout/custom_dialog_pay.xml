@@ -2,23 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
-    android:layout_height="match_parent"
-    tools:context=".windows.PayWindow">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <com.braintreepayments.cardform.view.CardForm
-        android:id="@+id/cardform_credit_card"
+        android:id="@+id/cardform_credit_card_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/button_pay_cart"
+        android:id="@+id/button_pay_cart_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="15dp"
         android:text="Pagar" />
-
-
 </RelativeLayout>
