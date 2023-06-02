@@ -30,7 +30,6 @@ public class FirstWindow extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.first_window);
 
-        ProductsManager pm = new ProductsManager(this);
         TypesManager tm = new TypesManager();
 
         Date date = Calendar.getInstance().getTime();

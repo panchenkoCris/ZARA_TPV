@@ -95,7 +95,7 @@ public class ShopWindow extends AppCompatActivity {
         adapter =  new ListProductsShopAdapter(clothes, true, new ListProductsShopAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Producto item) {
-                DialogManager.openDialogClotheResumeShop(ShopWindow.this, adapter, item, clothes.indexOf(item));
+                DialogManager.openDialogClotheTakeOut(ShopWindow.this, item);
             }
         });
     }

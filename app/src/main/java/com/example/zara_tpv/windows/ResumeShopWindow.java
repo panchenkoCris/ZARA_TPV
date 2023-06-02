@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.zara_tpv.R;
 import com.example.zara_tpv.adapter.ListProductsAdapter;
 import com.example.zara_tpv.manager.DialogManager;
+import com.example.zara_tpv.manager.ProductsManager;
 import com.example.zara_tpv.pojo.Producto;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resume_shop_window);
 
+        ProductsManager pm = new ProductsManager(this);
         setAdapter();
         setRecyclerView((RecyclerView) findViewById(R.id.recyclerView_clothes));
         setToolbar((Toolbar) findViewById(R.id.toolbar_menu));
@@ -45,7 +47,7 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         adapter =  new ListProductsAdapter(clothes, false, new ListProductsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Producto clothe) {
-                DialogManager.openDialogClotheResume(ResumeShopWindow.this, adapter, clothe, clothes.indexOf(clothe));
+                DialogManager.openDialogClotheResumeCart(ResumeShopWindow.this, adapter, clothe, clothes.indexOf(clothe));
             }
         });
     }

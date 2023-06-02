@@ -74,6 +74,7 @@
     <string name="textView_title_discount">Available discounts</string>
     <string name="button_apply_discount">Apply</string>
 
-    <string name="message_warehouse">Product requested correctly</string>
+    <string name="message_warehouse_cart">Product requested correctly</string>
+    <string name="message_warehouse_take_out">Product added to the cart correctly</string>
     <string name="button_add_cart">Add to cart</string>
 </resources>

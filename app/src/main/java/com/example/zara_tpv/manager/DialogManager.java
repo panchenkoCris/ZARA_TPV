@@ -92,21 +92,21 @@ public class DialogManager {
         dialog.show();
     }
 
-    public static void openDialogClotheTakeOut(Context context, ListProductsAdapter adapter, Producto clothe) {
+    public static void openDialogClotheTakeOut(Context context, Producto clothe) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.custom_dialog_clothe_warehouse);
 
-        final TextView textTitleName = dialog.findViewById(R.id.textView_title_name_clothe);
-        final TextView textTitleSize = dialog.findViewById(R.id.textView_title_size_clothe);
-        final TextView textTitleColor = dialog.findViewById(R.id.textView_title_color_clothe);
+        final TextView textTitleName = dialog.findViewById(R.id.textView_title_name_clothe_warehouse);
+        final TextView textTitleSize = dialog.findViewById(R.id.textView_title_size_clothe_warehouse);
+        final TextView textTitleColor = dialog.findViewById(R.id.textView_title_color_clothe_warehouse);
 
-        final TextView textSize = dialog.findViewById(R.id.textView_size_clothe_dialog);
-        final TextView textColor = dialog.findViewById(R.id.textView_color_clothe_dialog);
+        final TextView textSize = dialog.findViewById(R.id.textView_size_clothe_warehouse);
+        final TextView textColor = dialog.findViewById(R.id.textView_color_clothe_warehouse);
 
-        final Button buttonAddCart = dialog.findViewById(R.id.button_add_cart);
-        final Button buttonTakeOutClothe = dialog.findViewById(R.id.button_take_out_clothe);
+        final Button buttonAddCart = dialog.findViewById(R.id.button_add_cart_warehouse);
+        final Button buttonTakeOutClothe = dialog.findViewById(R.id.button_take_out_clothe_warehouse);
 
         Type type = TypesManager.getOneType(clothe.getId_tipo());
         textTitleName.setText(type.getNombre_tipo()+" "+((type.getLongitud_tipo()!=null) ? type.getLongitud_tipo() : clothe.getColor()));
@@ -118,64 +118,32 @@ public class DialogManager {
 
         buttonAddCart.setOnClickListener((v) -> {
             ListProductsAdapter.addProducto(clothe);
-            Toast.makeText(context, R.string.message_warehouse, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.message_warehouse_cart, Toast.LENGTH_SHORT).show();
             dialog.dismiss();
         });
 
         buttonTakeOutClothe.setOnClickListener((v) -> {
-            Toast.makeText(context, R.string.message_warehouse, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.message_warehouse_take_out, Toast.LENGTH_SHORT).show();
             dialog.dismiss();
         });
 
         dialog.show();
     }
 
-    public static void openDialogClotheResume(Context context, ListProductsAdapter adapter, Producto clothe, int position) {
+    public static void openDialogClotheResumeCart(Context context, ListProductsAdapter adapter, Producto clothe, int position) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.custom_dialog_clothe_resume);
 
-        final TextView textTitleName = dialog.findViewById(R.id.textView_title_name_clothe);
-        final TextView textTitleSize = dialog.findViewById(R.id.textView_title_size_clothe);
-        final TextView textTitleColor = dialog.findViewById(R.id.textView_title_color_clothe);
+        final TextView textTitleName = dialog.findViewById(R.id.textView_title_name_clothe_cart);
+        final TextView textTitleSize = dialog.findViewById(R.id.textView_title_size_clothe_cart);
+        final TextView textTitleColor = dialog.findViewById(R.id.textView_title_color_clothe_cart);
 
-        final TextView textSize = dialog.findViewById(R.id.textView_size_clothe_dialog);
-        final TextView textColor = dialog.findViewById(R.id.textView_color_clothe_dialog);
+        final TextView textSize = dialog.findViewById(R.id.textView_size_clothe_cart);
+        final TextView textColor = dialog.findViewById(R.id.textView_color_clothe_cart);
 
-        final Button buttonDeleteClothe = dialog.findViewById(R.id.button_delete_clothe);
-
-        Type type = TypesManager.getOneType(clothe.getId_tipo());
-        textTitleName.setText(type.getNombre_tipo()+" "+type.getLongitud_tipo());
-        textTitleSize.setText(context.getString(R.string.textView_title_size_clothe));
-        textTitleColor.setText(context.getString(R.string.textView_title_color_clothe));
-
-        textSize.setText(String.valueOf(clothe.getTalla()));
-        textColor.setText(clothe.getColor());
-
-        buttonDeleteClothe.setOnClickListener((v) -> {
-            adapter.removeItem(position);
-            Toast.makeText(context, context.getString(R.string.message_delete_clothe), Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
-        });
-
-        dialog.show();
-    }
-
-    public static void openDialogClotheResumeShop(Context context, ListProductsShopAdapter adapter, Producto clothe, int position) {
-        final Dialog dialog = new Dialog(context);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true);
-        dialog.setContentView(R.layout.custom_dialog_clothe_resume);
-
-        final TextView textTitleName = dialog.findViewById(R.id.textView_title_name_clothe);
-        final TextView textTitleSize = dialog.findViewById(R.id.textView_title_size_clothe);
-        final TextView textTitleColor = dialog.findViewById(R.id.textView_title_color_clothe);
-
-        final TextView textSize = dialog.findViewById(R.id.textView_size_clothe_dialog);
-        final TextView textColor = dialog.findViewById(R.id.textView_color_clothe_dialog);
-
-        final Button buttonDeleteClothe = dialog.findViewById(R.id.button_delete_clothe);
+        final Button buttonDeleteClothe = dialog.findViewById(R.id.button_delete_clothe_cart);
 
         Type type = TypesManager.getOneType(clothe.getId_tipo());
         textTitleName.setText(type.getNombre_tipo()+" "+type.getLongitud_tipo());
