@@ -1,24 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".windows.PayWindow">
 
-    <com.braintreepayments.cardform.view.CardForm
-        android:id="@+id/cardform_credit_card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/imagePaypal"
+        android:layout_width="382dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.158"
+        app:srcCompat="@drawable/paypal" />
 
     <Button
-        android:id="@+id/button_pay_cart"
-        android:layout_width="match_parent"
+        android:id="@+id/button_pay_paypal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="15dp"
-        android:text="Pagar" />
+        android:layout_centerHorizontal="true"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-</RelativeLayout>
+    <EditText
+        android:id="@+id/editText_amount_pay"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_pay_paypal"
+        android:layout_alignStart="@+id/imagePaypal"
+        android:layout_alignEnd="@+id/imagePaypal"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="Insert the amount..."
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_pay_paypal"
+        app:layout_constraintEnd_toEndOf="@+id/imagePaypal"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imagePaypal" />
+</androidx.constraintlayout.widget.ConstraintLayout>
