@@ -31,7 +31,7 @@ public class DiscountAdapter extends RecyclerView.Adapter<DiscountAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull DiscountAdapter.ViewHolder holder, int position) {
-        holder.getDescripcion().setText(data.get(position).getDescripcion());
+        holder.description.setText(data.get(position).getDescripcion());
     }
 
     @Override
@@ -45,10 +45,6 @@ public class DiscountAdapter extends RecyclerView.Adapter<DiscountAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             description = itemView.findViewById(R.id.textView_text_discount);
-        }
-
-        public TextView getDescripcion() {
-            return description;
         }
     }
 }

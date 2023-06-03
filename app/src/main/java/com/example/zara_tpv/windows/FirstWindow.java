@@ -31,6 +31,7 @@ public class FirstWindow extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.first_window);
 
         TypesManager tm = new TypesManager();
+        ProductsManager pm = new ProductsManager(this);
 
         Date date = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM_dd", Locale.getDefault());

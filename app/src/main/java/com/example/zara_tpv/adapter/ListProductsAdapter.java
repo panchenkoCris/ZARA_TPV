@@ -27,13 +27,13 @@ public class ListProductsAdapter extends RecyclerView.Adapter<ListProductsAdapte
         void onItemClick(Producto item);
     }
 
-    public static void addProducto(Producto producto) {
-        data.add(producto);
+    public void addProducto(Producto producto) {
+        TicketManager.setAdapter(this);
         TicketManager.addLineTicket(producto);
     }
 
-    public void setProductos(List<Producto> productos) {
-        this.data.addAll(productos);
+    public static void setProductos(List<Producto> productos) {
+        data = productos;
     }
 
     public ListProductsAdapter(List<Producto> data, boolean windowIsShop,OnItemClickListener listener) {

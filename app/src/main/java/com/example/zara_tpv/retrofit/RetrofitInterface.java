@@ -1,5 +1,6 @@
 package com.example.zara_tpv.retrofit;
 
+import com.example.zara_tpv.pojo.Autentificacion;
 import com.example.zara_tpv.pojo.Discount;
 import com.example.zara_tpv.pojo.LineaTicket;
 import com.example.zara_tpv.pojo.Producto;
@@ -30,16 +31,19 @@ public interface RetrofitInterface {
     @GET("tipo")
     Call<List<Type>> getAllTypes();
 
-    @POST("usuarios/authenticate")
-    Call<String[]> authenticate(@Query("correo") String correo, @Query("contraseña") String password);
+    @GET("authenticate")
+    Call<Autentificacion> authenticate(@Query("correo") String correo, @Query("contraseña") String password);
 
-    @GET("descuento")
-    Call<List<Discount>> getAllDiscounts();
+    @GET("descuentosUsuario")
+    Call<List<Discount>> getAllDiscountsPerUser(@Query("id_usuario") int id_usuario);
 
     @POST("ticket/create")
     Call<Ticket> createTicket(@Body Ticket ticket);
 
     @POST("lineaticket/create")
     Call<LineaTicket> createLineaTicket(@Body LineaTicket lineaticket);
+
+    @GET("productosTicket")
+    Call<List<Producto>> getProductosPerTicket(@Query("id_ticket") int id_ticket);
 
 }

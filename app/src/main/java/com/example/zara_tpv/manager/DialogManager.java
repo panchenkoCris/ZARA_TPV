@@ -18,14 +18,21 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.braintreepayments.cardform.view.CardForm;
 import com.example.zara_tpv.R;
+import com.example.zara_tpv.adapter.DiscountAdapter;
 import com.example.zara_tpv.adapter.ListProductsAdapter;
 import com.example.zara_tpv.adapter.ListProductsShopAdapter;
+import com.example.zara_tpv.pojo.Discount;
 import com.example.zara_tpv.pojo.Producto;
 import com.example.zara_tpv.pojo.Type;
 import com.example.zara_tpv.windows.ResumeShopWindow;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DialogManager {
     static AlertDialog.Builder alerBuilder;
@@ -117,7 +124,8 @@ public class DialogManager {
         textColor.setText(clothe.getColor());
 
         buttonAddCart.setOnClickListener((v) -> {
-            ListProductsAdapter.addProducto(clothe);
+            ListProductsAdapter adapter = ResumeShopWindow.getAdapter();
+            adapter.addProducto(clothe);
             Toast.makeText(context, R.string.message_warehouse_cart, Toast.LENGTH_SHORT).show();
             dialog.dismiss();
         });
@@ -192,19 +200,23 @@ public class DialogManager {
         dialog.show();
     }
 
-    public static void openDialogDiscounts(Context context) {
+    public static void openDialogDiscounts(Context context, List<Discount> discounts) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.custom_dialog_discounts);
 
-        DiscountsManager dm = new DiscountsManager();
+        final DiscountAdapter adapter = new DiscountAdapter(discounts);
+        final RecyclerView recyclerView = dialog.findViewById(R.id.recyclerview_discounts);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(adapter);
+//        final Button buttonApply = dialog.findViewById(R.id.button_apply_discount);
+//
+//        buttonApply.setOnClickListener((v) -> {
+//            dialog.dismiss();
+//        });
 
-        final Button buttonApply = dialog.findViewById(R.id.button_apply_discount);
-
-        buttonApply.setOnClickListener((v) -> {
-            dialog.dismiss();
-        });
+        dialog.show();
     }
 
     public static void openDialogPayCredit(Context context) {

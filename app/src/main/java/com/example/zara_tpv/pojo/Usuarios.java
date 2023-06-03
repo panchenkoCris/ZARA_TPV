@@ -3,6 +3,8 @@ package com.example.zara_tpv.pojo;
 import com.google.gson.annotations.SerializedName;
 
 public class Usuarios {
+    @SerializedName("id_usuario")
+    private int id_usuario;
     @SerializedName("nombre")
     private String nombre;
     @SerializedName("correo")
@@ -12,11 +14,20 @@ public class Usuarios {
     @SerializedName("rol")
     private String rol;
 
-    public Usuarios(String nombre, String correo, String contraseña, String rol) {
+    public Usuarios(int id_usuario, String nombre, String correo, String contraseña, String rol) {
+        this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.correo = correo;
         this.contraseña = contraseña;
         this.rol = rol;
+    }
+
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     public String getNombre() {

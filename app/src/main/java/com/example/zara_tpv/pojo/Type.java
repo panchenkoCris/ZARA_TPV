@@ -1,8 +1,13 @@
 package com.example.zara_tpv.pojo;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Type {
+    @SerializedName("id")
     private int id;
+    @SerializedName("nombre_tipo")
     private String nombre_tipo;
+    @SerializedName("longitud_tipo")
     private String longitud_tipo;
 
     public Type(int id, String nombre_tipo, String longitud_tipo) {

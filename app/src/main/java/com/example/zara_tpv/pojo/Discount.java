@@ -1,8 +1,13 @@
 package com.example.zara_tpv.pojo;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Discount {
+    @SerializedName("id")
     private int id;
+    @SerializedName("descripcion")
     private String descripcion;
+    @SerializedName("cantidad_descuento")
     private double cantidad_descuento;
     public Discount(int id, String descripcion, double cantidad_descuento) {
         this.id = id;

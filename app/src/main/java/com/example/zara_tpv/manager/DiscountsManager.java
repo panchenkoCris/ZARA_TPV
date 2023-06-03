@@ -1,5 +1,7 @@
 package com.example.zara_tpv.manager;
 
+import android.content.Context;
+
 import com.example.zara_tpv.pojo.Discount;
 import com.example.zara_tpv.pojo.Type;
 import com.example.zara_tpv.retrofit.RetrofitInterface;
@@ -13,19 +15,19 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DiscountsManager {
-    private static List<Discount> descuentos = new ArrayList<>();
+    private List<Discount> descuentos;
 
     public DiscountsManager() {
         this.descuentos = new ArrayList<>();
-        getAllDiscounts();
     }
-    public void getAllDiscounts() {
+    public void getAllDiscounts(int id_usuario, Context context) {
         RetrofitService retrofitService = new RetrofitService();
         RetrofitInterface productoInterface = retrofitService.getRetrofit().create(RetrofitInterface.class);
-        productoInterface.getAllDiscounts().enqueue(new Callback<List<Discount>>() {
+        productoInterface.getAllDiscountsPerUser(id_usuario).enqueue(new Callback<List<Discount>>() {
             @Override
             public void onResponse(Call<List<Discount>> call, Response<List<Discount>> response) {
                 descuentos = response.body();
+                DialogManager.openDialogDiscounts(context, descuentos);
             }
 
             @Override
@@ -33,5 +35,9 @@ public class DiscountsManager {
 
             }
         });
+    }
+
+    public List<Discount> getDescuentos() {
+        return descuentos;
     }
 }

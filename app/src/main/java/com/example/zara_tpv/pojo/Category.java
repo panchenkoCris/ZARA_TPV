@@ -1,7 +1,11 @@
 package com.example.zara_tpv.pojo;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Category {
+    @SerializedName("id")
     private int id;
+    @SerializedName("genero")
     private String genero;
 
     public Category(int id, String genero) {
