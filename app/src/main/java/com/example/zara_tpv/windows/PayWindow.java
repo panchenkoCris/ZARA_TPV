@@ -1,45 +1,53 @@
 package com.example.zara_tpv.windows;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.braintreepayments.cardform.view.CardForm;
 import com.example.zara_tpv.R;
+import com.example.zara_tpv.adapter.ListProductsAdapter;
+import com.example.zara_tpv.manager.DialogManager;
+import com.example.zara_tpv.manager.TicketManager;
+import com.example.zara_tpv.pojo.Producto;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
-import com.paypal.android.sdk.payments.PaymentConfirmActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class PayWindow extends AppCompatActivity {
 
-//    private CardForm cardForm;
-//    private Button buttonPay;
-//    AlertDialog.Builder alerBuilder;
+    private EditText editAmount;
+    private Button buttonPay;
+    private TextView amountDiscounts;
+    private TextView percentTax;
+    private ListProductsAdapter adapter;
+    private List<Producto> productoList;
 
-    EditText editAmount;
-    Button buttonPay;
-
-    String client = "ASXBae5jVymPA6q5_8xOKaEEnRKM_zGqnRMrNxAK4HQcXePp0s6CH-koC3zCgInskFJLcXfqDWcon5hk";
-
-    int PAYPAL_REQUEST_CODE = 123;
+    private String client = "ASXBae5jVymPA6q5_8xOKaEEnRKM_zGqnRMrNxAK4HQcXePp0s6CH-koC3zCgInskFJLcXfqDWcon5hk";
+    private final static int PAYPAL_REQUEST_CODE = 123;
+    private final double PERCENT_TAX = 0.21;
 
     public static PayPalConfiguration configuration;
 
@@ -48,8 +56,18 @@ public class PayWindow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pay_window);
 
+        productoList = TicketManager.getProductos();
+
+        setToolbar((Toolbar) findViewById(R.id.toolbar_menu));
+        percentTax = findViewById(R.id.textView_total_percent_tax);
+        amountDiscounts = findViewById(R.id.textView_total_percent_discounts);
         editAmount = findViewById(R.id.editText_amount_pay);
-        buttonPay = findViewById(R.id.button_pay_paypal);
+        setAdapter();
+        setRecyclerView((RecyclerView) findViewById(R.id.recyclerView_clothes_final_pay));
+        buttonPay = findViewById(R.id.button_final_pay);
+
+        percentTax.setText(PERCENT_TAX*100+"%");
+        setValueAmount();
 
         configuration = new PayPalConfiguration()
                         .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
@@ -61,56 +79,46 @@ public class PayWindow extends AppCompatActivity {
                 getPayment();
             }
         });
-//
-//        cardForm = findViewById(R.id.cardform_credit_card);
-//        buttonPay = findViewById(R.id.button_pay_cart);
-//
-//        cardForm.cardRequired(true)
-//                .expirationRequired(true)
-//                .cvvRequired(true)
-//                .postalCodeRequired(true)
-//                .mobileNumberRequired(true)
-//                .mobileNumberExplanation("SMS is required on this number")
-//                .setup(PayWindow.this);
-//        cardForm.getCvvEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-//        buttonPay.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(cardForm.isValid()) {
-//                    alerBuilder = new AlertDialog.Builder(PayWindow.this);
-//                    alerBuilder.setTitle("Confirm before purchase");
-//                    alerBuilder.setMessage("Card number" + cardForm.getCardNumber() + "\n"
-//                        + "Card expiry date: " + cardForm.getExpirationDateEditText().getText().toString() + "\n"
-//                        + "Card CVV: " + cardForm.getCvv() + "\n"
-//                        + "Postal number: " + cardForm.getPostalCode() + "\n"
-//                        + "Phone number: " + cardForm.getMobileNumber());
-//                    alerBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.dismiss();
-//                            Toast.makeText(PayWindow.this, "Confirmed purchase", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//
-//                    alerBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.dismiss();
-//                        }
-//                    });
-//
-//                    AlertDialog alertDialog = alerBuilder.create();
-//                    alertDialog.show();
-//                } else {
-//                    Toast.makeText(PayWindow.this, "Please complete the form", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+    }
+
+    private void setValueAmount() {
+        double totalAmount = 0;
+        for (Producto p : productoList) {
+            totalAmount += p.getPrecio();
+        }
+
+        totalAmount = totalAmount+(totalAmount*PERCENT_TAX);
+
+        editAmount.setText(String.format("%.2f", totalAmount));
+    }
+
+    private void setToolbar(Toolbar toolbar) {
+        toolbar.setTitle(R.string.title_final_shop);
+
+        Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.icon_menu);
+        toolbar.setOverflowIcon(drawable);
+        toolbar.setContentInsetsAbsolute(40,0);
+        setSupportActionBar(toolbar);
+    }
+
+    private void setRecyclerView(RecyclerView recyclerView) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void setAdapter() {
+        adapter =  new ListProductsAdapter(productoList, false, new ListProductsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Producto clothe) {
+                DialogManager.openDialogClotheResumeCart(PayWindow.this, adapter, clothe, productoList.indexOf(clothe));
+            }
+        });
     }
 
     private void getPayment() {
         String amount = editAmount.getText().toString();
-        PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(amount)), "USD", "Code with Arvind", PayPalPayment.PAYMENT_INTENT_SALE);
+        BigDecimal result = new BigDecimal(amount.replaceAll(",", "."));
+        PayPalPayment payment = new PayPalPayment(result, "EUR", "Total a pagar", PayPalPayment.PAYMENT_INTENT_SALE);
         Intent intent = new Intent(this, PaymentActivity.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, configuration);
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);

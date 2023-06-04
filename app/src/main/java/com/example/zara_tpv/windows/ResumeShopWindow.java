@@ -110,7 +110,11 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
                 startActivity(new Intent(this, ScannerWindow.class));
                 break;
             case R.id.button_payClothes:
-                startActivity(new Intent(this, PayWindow.class));
+                if(!TicketManager.getProductos().isEmpty()) {
+                    startActivity(new Intent(this, PayWindow.class));
+                } else {
+                    DialogManager.openDialogError(this, "Debe haber productos dentro de la cesta");
+                }
                 break;
         }
     }

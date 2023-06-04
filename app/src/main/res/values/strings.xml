@@ -53,6 +53,7 @@
     <string name="title_shop">C O M P R A</string>
     <string name="title_login">C U E N T A - Z A R A</string>
     <string name="title_dresser">T I E N D A</string>
+    <string name="title_final_shop">R E S U M E N</string>
 
     <!-- Elementos de la ventana 'shop_window', los filtros -->
     <string name="textView_title_name_category">Categoria</string>
@@ -76,5 +77,9 @@
     <string name="message_warehouse_cart">Producto añadido al carrito correctamente</string>
     <string name="message_warehouse_take_out">Producto solicitado correctamente</string>
     <string name="button_add_cart">Añadir al carrito</string>
-
+    <string name="button_final_pay">Finalizar compra</string>
+    <string name="textView_final_resume">Resumen de la compra</string>
+    <string name="textView_percent_tax">Porcentaje IVA</string>
+    <string name="textView_percent_discounts">Porcentaje descuentos</string>
+    <string name="textView_total_amount">TOTAL A PAGAR</string>
 </resources>

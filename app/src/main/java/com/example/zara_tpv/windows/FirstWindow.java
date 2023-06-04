@@ -33,11 +33,7 @@ public class FirstWindow extends AppCompatActivity implements View.OnClickListen
         TypesManager tm = new TypesManager();
         ProductsManager pm = new ProductsManager(this);
 
-        Date date = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM_dd", Locale.getDefault());
-        String dateFormatted = df.format(date);
-
-        TicketManager ticketManager = new TicketManager(new Ticket(dateFormatted, 0));
+        TicketManager ticketManager = new TicketManager();
 
         vv = (VideoView) findViewById(R.id.videoView);
         Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.initial_video);

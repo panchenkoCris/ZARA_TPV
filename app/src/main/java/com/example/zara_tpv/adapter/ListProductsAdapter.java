@@ -1,5 +1,8 @@
 package com.example.zara_tpv.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,7 @@ import com.example.zara_tpv.pojo.LineaTicket;
 import com.example.zara_tpv.pojo.Producto;
 import com.example.zara_tpv.pojo.Type;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public class ListProductsAdapter extends RecyclerView.Adapter<ListProductsAdapter.ViewHolder> {
@@ -84,6 +88,18 @@ public class ListProductsAdapter extends RecyclerView.Adapter<ListProductsAdapte
         }
 
         public void bind(Producto producto, final OnItemClickListener listener) {
+            byte[] data = null;
+            try {
+                data = producto.getImagen().getBytes("UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            if(data != null) {
+                Bitmap bit = BitmapFactory.decodeByteArray(data, 0, data.length);
+                iconImage.setImageBitmap(bit);
+            }
+
             if(!windowIsShop) {
                 size.setText(String.valueOf(producto.getTalla()));
                 price.setText(String.valueOf((int) producto.getPrecio()));

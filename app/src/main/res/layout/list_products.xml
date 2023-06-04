@@ -7,10 +7,10 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv"
-        android:layout_width="659dp"
+        android:layout_width="match_parent"
         android:layout_height="166dp"
-        android:layout_marginLeft="100dp"
         android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
         android:animateLayoutChanges="true"
         app:cardCornerRadius="10dp"
         app:cardElevation="0dp"

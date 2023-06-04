@@ -7,8 +7,12 @@ import com.example.zara_tpv.pojo.Ticket;
 import com.example.zara_tpv.retrofit.RetrofitInterface;
 import com.example.zara_tpv.retrofit.RetrofitService;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,17 +23,45 @@ public class TicketManager {
     public static ListProductsAdapter adapter;
     public static List<Producto> productos = new ArrayList<>();
 
-    public TicketManager(Ticket ticket) {
-        createTicket(ticket);
+    public TicketManager() {
+        createTicket();
     }
 
-    public static void createTicket(Ticket ticket) {
+//    public static void getTicket() {
+//        RetrofitService retrofitService = new RetrofitService();
+//        RetrofitInterface ticketInterface = retrofitService.getRetrofit().create(RetrofitInterface.class);
+//        ticketInterface.obtenerTicketNoRegistrado().enqueue(new Callback<Ticket>() {
+//            @Override
+//            public void onResponse(Call<Ticket> call, Response<Ticket> response) {
+//                Ticket ticket = response.body();
+//                if(ticket == null) {
+//                    createTicket();
+//                } else {
+//                    ticketFinal = ticket;
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Ticket> call, Throwable t) {
+//
+//            }
+//        });
+//    }
+
+    private static void createTicket() {
+        Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM_dd", Locale.getDefault());
+        String dateFormatted = df.format(date);
+
+        Ticket ticket = new Ticket(dateFormatted, 0);
+
         RetrofitService retrofitService = new RetrofitService();
         RetrofitInterface ticketInterface = retrofitService.getRetrofit().create(RetrofitInterface.class);
         ticketInterface.createTicket(ticket).enqueue(new Callback<Ticket>() {
             @Override
             public void onResponse(Call<Ticket> call, Response<Ticket> response) {
-                ticketFinal = response.body();
+                Ticket ticket = response.body();
+                ticketFinal = ticket;
             }
 
             @Override

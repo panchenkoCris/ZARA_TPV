@@ -18,6 +18,8 @@ public class Producto {
     private String color;
     @SerializedName("descripcion")
     private String descripcion;
+    @SerializedName("imagen")
+    private String imagen;
     @SerializedName("id_tipo")
     private int id_tipo;
     @SerializedName("id_categoria")
@@ -98,5 +100,13 @@ public class Producto {
 
     public void setId_categoria(int id_categoria) {
         this.id_categoria = id_categoria;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }

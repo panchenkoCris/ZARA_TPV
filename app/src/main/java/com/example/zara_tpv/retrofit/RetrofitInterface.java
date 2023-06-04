@@ -12,6 +12,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -27,6 +28,9 @@ public interface RetrofitInterface {
 
     @POST("producto/create")
     Call<Producto> create(@Body Producto producto);
+
+    @GET("obtenerTicketNoRegistrado")
+    Call<Ticket> obtenerTicketNoRegistrado();
 
     @GET("tipo")
     Call<List<Type>> getAllTypes();

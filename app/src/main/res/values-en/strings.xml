@@ -54,6 +54,7 @@
     <string name="title_shop">P U R C H A S E</string>
     <string name="title_login">Z A R A - A C C O U N T</string>
     <string name="title_dresser">S H O P</string>
+    <string name="title_final_shop">R E S U M E</string>
 
     <!-- Elementos de la ventana 'shop_window' && los filtros -->
     <string name="editText_filter_name">Insert the reference of the garment</string>
@@ -77,4 +78,9 @@
     <string name="message_warehouse_cart">Product requested correctly</string>
     <string name="message_warehouse_take_out">Product added to the cart correctly</string>
     <string name="button_add_cart">Add to cart</string>
+    <string name="button_final_pay">Finish shop</string>
+    <string name="textView_final_resume">Summary of purchase</string>
+    <string name="textView_percent_tax">Percent VAT</string>
+    <string name="textView_percent_discounts">Percent discounts</string>
+    <string name="textView_total_amount">TOTAL AMOUNT</string>
 </resources>
