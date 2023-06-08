@@ -25,7 +25,7 @@
             app:srcCompat="@drawable/icon_styler" />
 
         <LinearLayout
-            android:layout_width="337dp"
+            android:layout_width="415dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="230dp"
             android:layout_marginRight="150dp"
@@ -73,7 +73,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="210dp"
+                android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
@@ -81,7 +81,7 @@
 
                 <TextView
                     android:id="@+id/textView_name_clothe"
-                    android:layout_width="match_parent"
+                    android:layout_width="236dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
@@ -91,7 +91,7 @@
 
                 <TextView
                     android:id="@+id/textView_size_clothe"
-                    android:layout_width="match_parent"
+                    android:layout_width="233dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
@@ -101,7 +101,7 @@
 
                 <TextView
                     android:id="@+id/textView_price_clothe"
-                    android:layout_width="match_parent"
+                    android:layout_width="233dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"

@@ -31,6 +31,7 @@ import com.example.zara_tpv.adapter.ListProductsShopAdapter;
 import com.example.zara_tpv.pojo.Producto;
 import com.example.zara_tpv.pojo.Usuarios;
 import com.example.zara_tpv.windows.FirstWindow;
+import com.example.zara_tpv.windows.PayWindow;
 import com.example.zara_tpv.windows.ResumeShopWindow;
 
 public class DialogManager {
@@ -206,6 +207,7 @@ public class DialogManager {
 
         buttonDeleteClothe.setOnClickListener((v) -> {
             adapter.removeItem(clothe);
+            PayWindow.setDiscountAmount(clothe.getPrecio());
             Toast.makeText(context, context.getString(R.string.message_delete_clothe), Toast.LENGTH_SHORT).show();
             dialog.dismiss();
         });

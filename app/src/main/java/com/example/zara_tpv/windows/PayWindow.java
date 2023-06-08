@@ -40,7 +40,7 @@ import java.util.List;
 
 public class PayWindow extends AppCompatActivity {
 
-    private EditText editAmount;
+    private static EditText editAmount;
     private Button buttonPay;
     private TextView amountDiscounts;
     private TextView percentTax;
@@ -49,10 +49,11 @@ public class PayWindow extends AppCompatActivity {
     private static List<Producto> productoList;
     private static List<Discount> discountList;
     private static double totalDiscounts = 0.0;
+    private static double totalAmount;
 
     private String client = "ASXBae5jVymPA6q5_8xOKaEEnRKM_zGqnRMrNxAK4HQcXePp0s6CH-koC3zCgInskFJLcXfqDWcon5hk";
     private final static int PAYPAL_REQUEST_CODE = 123;
-    private final double PERCENT_TAX = 0.21;
+    private static final double PERCENT_TAX = 0.21;
 
     public static PayPalConfiguration configuration;
 
@@ -60,6 +61,8 @@ public class PayWindow extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pay_window);
+
+        totalAmount = 0.0;
 
         productoList = ListProductsAdapter.getProductos();
         if(discountList == null) {
@@ -97,8 +100,7 @@ public class PayWindow extends AppCompatActivity {
         amountDiscounts.setText((totalDiscounts*100)+"%");
     }
 
-    private void setValueAmount() {
-        double totalAmount = 0;
+    private static void setValueAmount() {
         for (Producto p : productoList) {
             totalAmount += p.getPrecio();
         }
@@ -106,6 +108,15 @@ public class PayWindow extends AppCompatActivity {
         totalAmount = totalAmount+(totalAmount*PERCENT_TAX);
         totalAmount = totalAmount-(totalAmount*totalDiscounts);
 
+        editAmount.setText(String.format("%.2f", totalAmount));
+    }
+
+    public static void setDiscountAmount(double totalDiscount) {
+        if(productoList.isEmpty()) {
+            totalAmount = 0.0;
+        } else {
+            totalAmount -= totalDiscount;
+        }
         editAmount.setText(String.format("%.2f", totalAmount));
     }
 
