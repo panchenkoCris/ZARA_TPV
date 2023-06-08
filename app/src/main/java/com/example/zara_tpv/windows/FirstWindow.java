@@ -7,9 +7,6 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.VideoView;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 import android.os.Bundle;
 import android.content.Intent;
@@ -19,11 +16,11 @@ import com.example.zara_tpv.R;
 import com.example.zara_tpv.manager.ProductsManager;
 import com.example.zara_tpv.manager.TicketManager;
 import com.example.zara_tpv.manager.TypesManager;
-import com.example.zara_tpv.pojo.Ticket;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class FirstWindow extends AppCompatActivity implements View.OnClickListener {
     VideoView vv;
+    public static String language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +28,8 @@ public class FirstWindow extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.first_window);
 
         TypesManager tm = new TypesManager();
-        ProductsManager pm = new ProductsManager(this);
-
-        TicketManager ticketManager = new TicketManager();
+        ProductsManager productsManager = new ProductsManager();
+        TicketManager.getTicket();
 
         vv = (VideoView) findViewById(R.id.videoView);
         Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.initial_video);
@@ -44,6 +40,7 @@ public class FirstWindow extends AppCompatActivity implements View.OnClickListen
 
         FloatingActionButton button_spanish = findViewById(R.id.button_languageSpanish);
         FloatingActionButton button_english = findViewById(R.id.button_languageEnglish);
+
         button_spanish.setOnClickListener(this);
         button_english.setOnClickListener(this);
     }
@@ -55,9 +52,11 @@ public class FirstWindow extends AppCompatActivity implements View.OnClickListen
         switch (fab.getId()) {
             case R.id.button_languageSpanish:
                 setLocale("es");
+                language = "español";
                 break;
             case R.id.button_languageEnglish:
                 setLocale("en");
+                language = "english";
                 break;
         }
     }
@@ -94,5 +93,9 @@ public class FirstWindow extends AppCompatActivity implements View.OnClickListen
         res.updateConfiguration(conf, res.getDisplayMetrics());
         finish();
         startActivity(new Intent(this, ResumeShopWindow.class));
+    }
+
+    public static String getLanguage() {
+        return language;
     }
 }

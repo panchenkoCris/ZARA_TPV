@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/border"
     android:padding="5dip"
     tools:context=".windows.PayWindow">
 
@@ -24,34 +23,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_clothes_final_pay"
-        android:layout_width="1229dp"
-        android:layout_height="317dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="304dp"
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="1177dp"
+        android:layout_height="184dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.339"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_menu"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="1228dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/border"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/recyclerView_clothes_final_pay"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/recyclerView_clothes_final_pay"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView_clothes_final_pay"
-        app:layout_constraintVertical_bias="0.026">
+        app:layout_constraintHorizontal_bias="0.019"
+        app:layout_constraintStart_toStartOf="@+id/relativeLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3"
+        app:layout_constraintVertical_bias="0.177">
 
         <TextView
             android:id="@+id/textView_percent_tax"
@@ -72,35 +55,20 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView_percent_tax"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="9dp"
             android:text="@string/textView_percent_discounts"
             android:textAlignment="viewStart"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView_total_amount"
-            android:layout_width="463dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView_percent_discounts"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginBottom="49dp"
-            android:text="@string/textView_total_amount"
-            android:textAlignment="viewStart"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
             android:id="@+id/textView_total_percent_tax"
-            android:layout_width="538dp"
-            android:layout_height="34dp"
+            android:layout_width="526dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="192dp"
+            android:layout_marginStart="193dp"
             android:layout_marginTop="11dp"
             android:layout_marginEnd="16dp"
             android:layout_toEndOf="@+id/textView_percent_tax"
@@ -108,29 +76,42 @@
 
         <TextView
             android:id="@+id/textView_total_percent_discounts"
-            android:layout_width="535dp"
-            android:layout_height="33dp"
+            android:layout_width="522dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="191dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="18dp"
-            android:layout_toEndOf="@+id/textView_percent_discounts" />
+            android:layout_marginStart="195dp"
+            android:layout_marginTop="57dp"
+            android:layout_marginEnd="17dp"
+            android:layout_toEndOf="@+id/textView_percent_discounts"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/editText_amount_pay"
-            android:layout_width="534dp"
-            android:layout_height="65dp"
+            android:layout_width="487dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="193dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="43dp"
-            android:layout_toEndOf="@+id/textView_total_amount"
+            android:layout_marginStart="194dp"
+            android:layout_marginEnd="29dp"
+            android:layout_marginBottom="19dp"
+            android:layout_toEndOf="@+id/textView_total_amount_final_pay"
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/textView_total_amount_final_pay"
+            android:layout_width="467dp"
+            android:layout_height="42dp"
+            android:layout_below="@+id/textView_percent_discounts"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="6dp"
+            android:text="@string/textView_total_amount"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
     </RelativeLayout>
@@ -142,12 +123,85 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/icon_credit_card"
         android:text="@string/button_final_pay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/relativeLayout"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.997"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.142" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="434dp"
+        android:layout_height="353dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/border"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_toEndOf="@+id/imageView"
+            android:fontFamily="sans-serif-thin"
+            android:text="@string/textView_title_discount"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/recyclerview_discounts_user"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/recyclerview_discounts_user"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_discount" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_discounts_user"
+            android:layout_width="415dp"
+            android:layout_height="264dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="3dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="699dp"
+        android:layout_height="349dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/border"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/relativeLayout2"
+        app:layout_constraintHorizontal_bias="0.607"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_menu"
+        app:layout_constraintVertical_bias="0.104">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_clothes_final_pay"
+            android:layout_width="660dp"
+            android:layout_height="321dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="7dp" />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,10 +35,12 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resume_shop_window);
 
+        ProductsManager pm = new ProductsManager(this);
         clothes = new ArrayList<>();
-        clothes = TicketManager.getProductos();
 
         setAdapter();
+        clothes = TicketManager.getProductsPerTicket(adapter);
+
         setRecyclerView((RecyclerView) findViewById(R.id.recyclerView_clothes));
         setToolbar((Toolbar) findViewById(R.id.toolbar_menu));
         setButtons((Button) findViewById(R.id.button_openScannerCode),
@@ -47,7 +49,7 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
     }
 
     private void setAdapter() {
-        adapter =  new ListProductsAdapter(clothes, false, new ListProductsAdapter.OnItemClickListener() {
+        adapter =  new ListProductsAdapter(clothes, new ListProductsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Producto clothe) {
                 DialogManager.openDialogClotheResumeCart(ResumeShopWindow.this, adapter, clothe, clothes.indexOf(clothe));
@@ -91,7 +93,7 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
                 DialogManager.openDialogLogin(this);
                 break;
             case R.id.action_shopping:
-                Toast.makeText(this, "Shopping", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, this.getString(R.string.already_purchase), Toast.LENGTH_SHORT).show();
                 break;
             default:
                 return super.onOptionsItemSelected(item);
@@ -113,7 +115,7 @@ public class ResumeShopWindow extends AppCompatActivity implements View.OnClickL
                 if(!TicketManager.getProductos().isEmpty()) {
                     startActivity(new Intent(this, PayWindow.class));
                 } else {
-                    DialogManager.openDialogError(this, "Debe haber productos dentro de la cesta");
+                    DialogManager.openDialogError(this, this.getString(R.string.products_cart));
                 }
                 break;
         }

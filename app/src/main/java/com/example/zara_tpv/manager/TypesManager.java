@@ -1,9 +1,5 @@
 package com.example.zara_tpv.manager;
 
-import android.animation.TypeEvaluator;
-
-import com.example.zara_tpv.adapter.ListProductsAdapter;
-import com.example.zara_tpv.pojo.Producto;
 import com.example.zara_tpv.pojo.Type;
 import com.example.zara_tpv.retrofit.RetrofitInterface;
 import com.example.zara_tpv.retrofit.RetrofitService;

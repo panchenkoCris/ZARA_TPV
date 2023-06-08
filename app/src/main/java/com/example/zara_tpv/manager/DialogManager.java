@@ -2,40 +2,40 @@ package com.example.zara_tpv.manager;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.text.InputType;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Base64;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.braintreepayments.cardform.view.CardForm;
 import com.example.zara_tpv.R;
-import com.example.zara_tpv.adapter.DiscountAdapter;
 import com.example.zara_tpv.adapter.ListProductsAdapter;
 import com.example.zara_tpv.adapter.ListProductsShopAdapter;
-import com.example.zara_tpv.pojo.Discount;
 import com.example.zara_tpv.pojo.Producto;
-import com.example.zara_tpv.pojo.Type;
+import com.example.zara_tpv.pojo.Usuarios;
+import com.example.zara_tpv.windows.FirstWindow;
 import com.example.zara_tpv.windows.ResumeShopWindow;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DialogManager {
-    static AlertDialog.Builder alerBuilder;
+    private static ListProductsShopAdapter adapterAdmin;
+
     public static void openDialogCode(Context context) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -65,16 +65,19 @@ public class DialogManager {
         dialog.setContentView(R.layout.custom_dialog_sign_up);
 
         final EditText textIdentification = dialog.findViewById(R.id.editText_username_sign_up);
-        final EditText textNumber = dialog.findViewById(R.id.editText_telephone_sign_up);
         final EditText textEmail = dialog.findViewById(R.id.editText_email_sign_up);
         final EditText textPassword = dialog.findViewById(R.id.editText_password_sign_up);
         final EditText textRepeatPassword = dialog.findViewById(R.id.editText_repeat_password_sign_up);
         final Button buttonSignUp = dialog.findViewById(R.id.button_sign_up);
 
-        EditText[] textToValidate = {textIdentification, textEmail, textNumber, textPassword, textRepeatPassword};
+        EditText[] textToValidate = {textIdentification, textEmail, textPassword, textRepeatPassword};
 
         buttonSignUp.setOnClickListener((v) -> {
             if(ValidatorManager.passValidation(textToValidate, context)) {
+                UsuariosManager.createUsuarios(new Usuarios(textIdentification.getText().toString(),
+                        textEmail.getText().toString(),
+                        textPassword.getText().toString(),
+                        "cliente"), context);
                 dialog.dismiss();
             }
         });
@@ -108,20 +111,40 @@ public class DialogManager {
         final TextView textTitleName = dialog.findViewById(R.id.textView_title_name_clothe_warehouse);
         final TextView textTitleSize = dialog.findViewById(R.id.textView_title_size_clothe_warehouse);
         final TextView textTitleColor = dialog.findViewById(R.id.textView_title_color_clothe_warehouse);
+        final TextView textTitlePrice = dialog.findViewById(R.id.textView_title_price_clothe_warehouse);
 
+        final TextView textPrice = dialog.findViewById(R.id.textView_price_clothe_warehouse);
         final TextView textSize = dialog.findViewById(R.id.textView_size_clothe_warehouse);
         final TextView textColor = dialog.findViewById(R.id.textView_color_clothe_warehouse);
+        final ImageView imageClothe = dialog.findViewById(R.id.imageView_view_clothe_warehouse);
 
         final Button buttonAddCart = dialog.findViewById(R.id.button_add_cart_warehouse);
         final Button buttonTakeOutClothe = dialog.findViewById(R.id.button_take_out_clothe_warehouse);
 
-        Type type = TypesManager.getOneType(clothe.getId_tipo());
-        textTitleName.setText(type.getNombre_tipo()+" "+((type.getLongitud_tipo()!=null) ? type.getLongitud_tipo() : clothe.getColor()));
+        if(clothe.getImagen() != null) {
+            byte[] decodedBytes = Base64.decode(clothe.getImagen(), Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+
+            imageClothe.setImageBitmap(bitmap);
+        }
+
+        textTitleName.setText(ClotheNameManager.setName(clothe, context));
         textTitleSize.setText(context.getString(R.string.textView_title_size_clothe));
         textTitleColor.setText(context.getString(R.string.textView_title_color_clothe));
+        textTitlePrice.setText(R.string.textView_title_price_clothe);
 
-        textSize.setText(String.valueOf(clothe.getTalla()));
-        textColor.setText(clothe.getColor());
+        String sizeModified = String.valueOf(clothe.getTalla());
+        if(sizeModified.equals("0")) {
+            if(FirstWindow.getLanguage().equals("español")) {
+                sizeModified = "Talla única";
+            } else {
+                sizeModified = "Unique size";
+            }
+        }
+
+        textSize.setText(sizeModified);
+        textColor.setText(ColorManager.searchColor(clothe.getColor(), context));
+        textPrice.setText(String.valueOf(clothe.getPrecio()));
 
         buttonAddCart.setOnClickListener((v) -> {
             ListProductsAdapter adapter = ResumeShopWindow.getAdapter();
@@ -147,24 +170,170 @@ public class DialogManager {
         final TextView textTitleName = dialog.findViewById(R.id.textView_title_name_clothe_cart);
         final TextView textTitleSize = dialog.findViewById(R.id.textView_title_size_clothe_cart);
         final TextView textTitleColor = dialog.findViewById(R.id.textView_title_color_clothe_cart);
+        final TextView textTitlePrice = dialog.findViewById(R.id.textView_title_price_clothe_cart);
 
+        final TextView textPrice = dialog.findViewById(R.id.textView_price_clothe_cart);
         final TextView textSize = dialog.findViewById(R.id.textView_size_clothe_cart);
         final TextView textColor = dialog.findViewById(R.id.textView_color_clothe_cart);
+        final ImageView imageClothe = dialog.findViewById(R.id.imageView_view_clothe_cart);
 
         final Button buttonDeleteClothe = dialog.findViewById(R.id.button_delete_clothe_cart);
 
-        Type type = TypesManager.getOneType(clothe.getId_tipo());
-        textTitleName.setText(type.getNombre_tipo()+" "+type.getLongitud_tipo());
+        if(clothe.getImagen() != null) {
+            byte[] decodedBytes = Base64.decode(clothe.getImagen(), Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+
+            imageClothe.setImageBitmap(bitmap);
+        }
+
+        textTitleName.setText(ClotheNameManager.setName(clothe, context));
         textTitleSize.setText(context.getString(R.string.textView_title_size_clothe));
         textTitleColor.setText(context.getString(R.string.textView_title_color_clothe));
+        textTitlePrice.setText(R.string.textView_title_price_clothe);
 
-        textSize.setText(String.valueOf(clothe.getTalla()));
-        textColor.setText(clothe.getColor());
+        String sizeModified = String.valueOf(clothe.getTalla());
+        if(sizeModified.equals("0")) {
+            if(FirstWindow.getLanguage().equals("español")) {
+                sizeModified = "Talla única";
+            } else {
+                sizeModified = "Unique size";
+            }
+        }
+
+        textSize.setText(sizeModified);
+        textColor.setText(ColorManager.searchColor(clothe.getColor(), context));
+        textPrice.setText(String.valueOf(clothe.getPrecio()));
 
         buttonDeleteClothe.setOnClickListener((v) -> {
-            adapter.removeItem(position);
+            adapter.removeItem(clothe);
             Toast.makeText(context, context.getString(R.string.message_delete_clothe), Toast.LENGTH_SHORT).show();
             dialog.dismiss();
+        });
+
+        dialog.show();
+    }
+
+    public static void openDialogAdmin(Context context) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.custom_dialog_admin);
+
+        final EditText editTextFilter = dialog.findViewById(R.id.editText_filter_name);
+
+        ListProductsShopAdapter adapter = new ListProductsShopAdapter(ProductsManager.getClothesAdmin(), new ListProductsShopAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Producto item) {
+                openDialogClothesAdmin(item, context);
+            }
+        });
+
+        adapterAdmin = adapter;
+        setSearchView(editTextFilter);
+
+        final RecyclerView recyclerView = dialog.findViewById(R.id.recyclerview_clothes_admin);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(adapter);
+
+        dialog.show();
+    }
+
+    private static void setSearchView(EditText editTextFilter) {
+        editTextFilter.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (!s.toString().isEmpty()) {
+                        FilterManager.setFilterReferenceAdmin(s.toString(), adapterAdmin);
+                    }
+                }
+            });
+
+    }
+
+    private static void openDialogClothesAdmin(Producto producto, Context context) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.custom_dialog_clothes_admin);
+
+        final TextView textTitleName = dialog.findViewById(R.id.textView_title_name_clothe_admin);
+        final TextView textTitleSize = dialog.findViewById(R.id.textView_title_size_clothe_admin);
+        final TextView textTitleColor = dialog.findViewById(R.id.textView_title_color_clothe_admin);
+        final TextView textTitlePrice = dialog.findViewById(R.id.textView_title_price_clothe_admin);
+
+        final EditText editTextPrice = dialog.findViewById(R.id.editText_price_clothe_admin);
+        final Spinner spinnerSizes = dialog.findViewById(R.id.spinner_size_admin);
+        final TextView textColor = dialog.findViewById(R.id.textView_color_clothe_admin);
+        final ImageView imageClothe = dialog.findViewById(R.id.imageView_view_clothe_admin);
+
+        final Button buttonDeleteClothe = dialog.findViewById(R.id.button_delete_clothe_admin);
+        final Button buttonModifyClothe = dialog.findViewById(R.id.button_modify_clothe_admin);
+
+        if(producto.getImagen() != null) {
+            byte[] decodedBytes = Base64.decode(producto.getImagen(), Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+
+            imageClothe.setImageBitmap(bitmap);
+        }
+
+        textTitleName.setText(ClotheNameManager.setName(producto, context));
+        textTitleSize.setText(context.getString(R.string.textView_title_size_clothe));
+        textTitleColor.setText(context.getString(R.string.textView_title_color_clothe));
+        textTitlePrice.setText(R.string.textView_title_price_clothe);
+
+        textColor.setText(ColorManager.searchColor(producto.getColor(), context));
+        editTextPrice.setText(String.valueOf(producto.getPrecio()));
+
+        String[] allSizes = context.getResources().getStringArray(R.array.attributes_sizes);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, allSizes);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinnerSizes.setAdapter(adapter);
+
+        spinnerSizes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(String.valueOf(parent.getSelectedItem()).equals(context.getString(R.string.textView_title_size_clothe))) {
+                    Toast.makeText(context, "Debe insertar una talla", Toast.LENGTH_SHORT).show();
+                } else if (String.valueOf(parent.getSelectedItem()).equals(context.getString(R.string.noSize))) {
+                    producto.setTalla(0);
+                } else {
+                    producto.setTalla(Integer.valueOf((String) parent.getSelectedItem()));
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        buttonDeleteClothe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                adapterAdmin.removeItemAdmin(producto);
+                ProductsManager.deleteClothe(producto);
+            }
+        });
+
+        buttonModifyClothe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                producto.setPrecio(Double.parseDouble(editTextPrice.getText().toString()));
+                dialog.dismiss();
+                adapterAdmin.updateItemAdmin(producto);
+                ProductsManager.updateProducto(producto);
+            }
         });
 
         dialog.show();
@@ -184,12 +353,13 @@ public class DialogManager {
         setSpannableString(textViewSignUp, context);
 
         buttonSignIn.setOnClickListener((v) -> {
-//            if(!ValidatorManager.passValidationContent(usernameSignIn, context)
-//                    || !ValidatorManager.passValidationContent(usernameSignIn, context)) {
-//                openDialogError(context, context.getResources().getString(R.string.message_error_empty_field));
-//            } else {
+            if(!ValidatorManager.passValidationContent(userEmailSignIn, context)
+                    || !ValidatorManager.passValidationContent(passwordSignUp, context)) {
+                openDialogError(context, context.getResources().getString(R.string.message_error_empty_field));
+            } else {
                 LoginManager.accreditAccount(userEmailSignIn.getText().toString(), passwordSignUp.getText().toString(), context);
-//            }
+                dialog.dismiss();
+            }
         });
 
         textViewSignUp.setOnClickListener((v) -> {
@@ -199,81 +369,6 @@ public class DialogManager {
 
         dialog.show();
     }
-
-    public static void openDialogDiscounts(Context context, List<Discount> discounts) {
-        final Dialog dialog = new Dialog(context);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true);
-        dialog.setContentView(R.layout.custom_dialog_discounts);
-
-        final DiscountAdapter adapter = new DiscountAdapter(discounts);
-        final RecyclerView recyclerView = dialog.findViewById(R.id.recyclerview_discounts);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(adapter);
-//        final Button buttonApply = dialog.findViewById(R.id.button_apply_discount);
-//
-//        buttonApply.setOnClickListener((v) -> {
-//            dialog.dismiss();
-//        });
-
-        dialog.show();
-    }
-
-    public static void openDialogPayCredit(Context context) {
-        final Dialog dialog = new Dialog(context);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true);
-        dialog.setContentView(R.layout.custom_dialog_pay);
-
-        final CardForm cardForm = dialog.findViewById(R.id.cardform_credit_card_dialog);
-        final Button buttonPay = dialog.findViewById(R.id.button_pay_cart_dialog);
-
-        cardForm.cardRequired(true)
-                .expirationRequired(true)
-                .cvvRequired(true)
-                .postalCodeRequired(true)
-                .mobileNumberRequired(true)
-                .mobileNumberExplanation("SMS is required on this number")
-                .setup((AppCompatActivity) context);
-        cardForm.getCvvEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-        buttonPay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(cardForm.isValid()) {
-                    alerBuilder = new AlertDialog.Builder(context);
-                    alerBuilder.setTitle("Confirm before purchase");
-                    alerBuilder.setMessage("Card number" + cardForm.getCardNumber() + "\n"
-                            + "Card expiry date: " + cardForm.getExpirationDateEditText().getText().toString() + "\n"
-                            + "Card CVV: " + cardForm.getCvv() + "\n"
-                            + "Postal number: " + cardForm.getPostalCode() + "\n"
-                            + "Phone number: " + cardForm.getMobileNumber());
-                    alerBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            Toast.makeText(context, "Confirmed purchase", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                    alerBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-
-                    AlertDialog alertDialog = alerBuilder.create();
-                    alertDialog.show();
-                } else {
-                    Toast.makeText(context, "Please complete the form", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-
-
-
 
     private static void setSpannableString(TextView textView, Context context) {
         final SpannableString registerString = new SpannableString(context.getString(R.string.textView_sign_up));

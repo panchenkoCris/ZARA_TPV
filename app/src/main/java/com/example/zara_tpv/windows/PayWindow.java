@@ -18,9 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zara_tpv.R;
+import com.example.zara_tpv.adapter.DiscountAdapter;
 import com.example.zara_tpv.adapter.ListProductsAdapter;
+import com.example.zara_tpv.manager.CuentaManager;
 import com.example.zara_tpv.manager.DialogManager;
 import com.example.zara_tpv.manager.TicketManager;
+import com.example.zara_tpv.pojo.Discount;
 import com.example.zara_tpv.pojo.Producto;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
@@ -32,9 +35,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 public class PayWindow extends AppCompatActivity {
 
@@ -43,7 +45,10 @@ public class PayWindow extends AppCompatActivity {
     private TextView amountDiscounts;
     private TextView percentTax;
     private ListProductsAdapter adapter;
-    private List<Producto> productoList;
+    private DiscountAdapter discountAdapter;
+    private static List<Producto> productoList;
+    private static List<Discount> discountList;
+    private static double totalDiscounts = 0.0;
 
     private String client = "ASXBae5jVymPA6q5_8xOKaEEnRKM_zGqnRMrNxAK4HQcXePp0s6CH-koC3zCgInskFJLcXfqDWcon5hk";
     private final static int PAYPAL_REQUEST_CODE = 123;
@@ -56,14 +61,19 @@ public class PayWindow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pay_window);
 
-        productoList = TicketManager.getProductos();
+        productoList = ListProductsAdapter.getProductos();
+        if(discountList == null) {
+            discountList = new ArrayList<>();
+        }
 
         setToolbar((Toolbar) findViewById(R.id.toolbar_menu));
         percentTax = findViewById(R.id.textView_total_percent_tax);
         amountDiscounts = findViewById(R.id.textView_total_percent_discounts);
         editAmount = findViewById(R.id.editText_amount_pay);
-        setAdapter();
-        setRecyclerView((RecyclerView) findViewById(R.id.recyclerView_clothes_final_pay));
+        editAmount.setFocusable(false);
+        setAdapters();
+        setRecyclerViews((RecyclerView) findViewById(R.id.recyclerView_clothes_final_pay),
+                (RecyclerView) findViewById(R.id.recyclerview_discounts_user));
         buttonPay = findViewById(R.id.button_final_pay);
 
         percentTax.setText(PERCENT_TAX*100+"%");
@@ -76,9 +86,15 @@ public class PayWindow extends AppCompatActivity {
         buttonPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TicketManager.updateTicket();
                 getPayment();
             }
         });
+    }
+
+    private void setAmountDiscounts(double cantidad_descuento) {
+        totalDiscounts = totalDiscounts + cantidad_descuento;
+        amountDiscounts.setText((totalDiscounts*100)+"%");
     }
 
     private void setValueAmount() {
@@ -88,6 +104,7 @@ public class PayWindow extends AppCompatActivity {
         }
 
         totalAmount = totalAmount+(totalAmount*PERCENT_TAX);
+        totalAmount = totalAmount-(totalAmount*totalDiscounts);
 
         editAmount.setText(String.format("%.2f", totalAmount));
     }
@@ -101,16 +118,29 @@ public class PayWindow extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
-    private void setRecyclerView(RecyclerView recyclerView) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+    private void setRecyclerViews(RecyclerView recyclerViewProduct, RecyclerView recyclerViewDiscount) {
+        recyclerViewProduct.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewProduct.setAdapter(adapter);
+
+        recyclerViewDiscount.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewDiscount.setAdapter(discountAdapter);
     }
 
-    private void setAdapter() {
-        adapter =  new ListProductsAdapter(productoList, false, new ListProductsAdapter.OnItemClickListener() {
+    private void setAdapters() {
+        adapter =  new ListProductsAdapter(productoList,  new ListProductsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Producto clothe) {
                 DialogManager.openDialogClotheResumeCart(PayWindow.this, adapter, clothe, productoList.indexOf(clothe));
+            }
+        });
+
+        discountAdapter = new DiscountAdapter(discountList, new DiscountAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Discount item) {
+                CuentaManager.actualizarDescuentoUsuario(item, PayWindow.this);
+                setAmountDiscounts(item.getCantidad_descuento());
+                discountAdapter.removeItem(item);
+                setValueAmount();
             }
         });
     }
@@ -145,5 +175,13 @@ public class PayWindow extends AppCompatActivity {
         } else if(requestCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
             Toast.makeText(this, "Invalid payment", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public static void setTotalDiscounts(double totalDiscountsParameter) {
+        totalDiscounts += totalDiscountsParameter;
+    }
+
+    public static void setDiscountList(List<Discount> listDiscount) {
+       discountList = listDiscount;
     }
 }

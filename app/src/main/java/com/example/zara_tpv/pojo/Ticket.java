@@ -12,12 +12,12 @@ public class Ticket {
     @SerializedName("registrado")
     private int registrado;
     @SerializedName("id_usuario")
-    private Usuarios usuario;
+    private int id_usuario;
 
     public Ticket(String fecha, int registrado) {
         this.fecha = fecha;
         this.registrado = registrado;
-        this.usuario = null;
+        this.id_usuario = 0;
     }
 
     public int getId() {
@@ -44,11 +44,11 @@ public class Ticket {
         this.registrado = registrado;
     }
 
-    public Usuarios getUsuario() {
-        return usuario;
+    public int getUsuario() {
+        return id_usuario;
     }
 
-    public void setUsuario(Usuarios usuario) {
-        this.usuario = usuario;
+    public void setUsuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 }

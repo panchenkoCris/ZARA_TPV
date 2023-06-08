@@ -4,5 +4,15 @@
         <item>@string/textView_title_color_clothe</item>
         <item>@string/black</item>
         <item>@string/pink</item>
+        <item>@string/yellow</item>
+        <item>@string/green</item>
+        <item>@string/variosColours</item>
+        <item>@string/beige</item>
+        <item>@string/kaki</item>
+        <item>@string/white</item>
+        <item>@string/blue</item>
+        <item>@string/orange</item>
+        <item>@string/metallized</item>
+        <item>@string/brown</item>
     </string-array>
 </resources>

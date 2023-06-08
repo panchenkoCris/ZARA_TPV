@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="attributes_sizes">
+        <item>@string/textView_title_size_clothe</item>
+        <item>@string/noSize</item>
+        <item>30</item>
+        <item>32</item>
+        <item>34</item>
+        <item>36</item>
         <item>38</item>
         <item>40</item>
+        <item>42</item>
+        <item>44</item>
     </string-array>
 </resources>

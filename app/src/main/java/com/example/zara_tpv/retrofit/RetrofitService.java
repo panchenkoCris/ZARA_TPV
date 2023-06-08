@@ -14,7 +14,7 @@ public class RetrofitService {
 
     private void initializeRetrofit() {
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://dbshoptpv.000webhostapp.com/public/")
+                .baseUrl("https://30ef-83-53-40-53.ngrok-free.app/tpv_api/public/")
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .build();
 

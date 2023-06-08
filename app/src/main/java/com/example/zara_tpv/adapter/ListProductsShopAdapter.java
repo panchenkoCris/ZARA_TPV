@@ -13,18 +13,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zara_tpv.R;
-import com.example.zara_tpv.manager.TicketManager;
-import com.example.zara_tpv.manager.TypesManager;
+import com.example.zara_tpv.manager.ClotheNameManager;
+import com.example.zara_tpv.manager.ProductsManager;
 import com.example.zara_tpv.pojo.Producto;
-import com.example.zara_tpv.pojo.Type;
-
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public class ListProductsShopAdapter extends RecyclerView.Adapter<ListProductsShopAdapter.ViewHolder> {
     private static List<Producto> data;
+    private static List<Producto> originalData;
     private final OnItemClickListener listener;
-    private boolean windowIsShop;
 
     public void setFilteredList(List<Producto> listFiltered) {
         this.data = listFiltered;
@@ -39,18 +36,16 @@ public class ListProductsShopAdapter extends RecyclerView.Adapter<ListProductsSh
         this.data.addAll(productos);
     }
 
-    public ListProductsShopAdapter(List<Producto> data, boolean windowIsShop, OnItemClickListener listener) {
+    public ListProductsShopAdapter(List<Producto> data, OnItemClickListener listener) {
         this.data = data;
-        this.windowIsShop = windowIsShop;
+        this.originalData = data;
         this.listener = listener;
     }
 
     @NonNull
     @Override
     public ListProductsShopAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = (windowIsShop) ?
-                LayoutInflater.from(parent.getContext()).inflate(R.layout.list_products_shop, parent,false) :
-                LayoutInflater.from(parent.getContext()).inflate(R.layout.list_products, parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_products_shop, parent,false);
         return new ViewHolder(v);
     }
 
@@ -64,49 +59,37 @@ public class ListProductsShopAdapter extends RecyclerView.Adapter<ListProductsSh
         return data.size();
     }
 
-    public void removeItem(int position) {
-        data.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, data.size());
+    public void removeItemAdmin(Producto producto) {
+        data.remove(producto);
+        notifyItemRemoved(data.indexOf(producto));
+        notifyItemRangeChanged(data.indexOf(producto), data.size());
+    }
+
+    public void updateItemAdmin(Producto producto) {
+        data.remove(producto);
+        notifyItemRemoved(data.indexOf(producto));
+        data.add(producto);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iconImage;
-        TextView name, size, price;
+        TextView name;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            if(!windowIsShop) {
-                iconImage = itemView.findViewById(R.id.imageView_clothe);
-                name = itemView.findViewById(R.id.textView_name_clothe);
-                size = itemView.findViewById(R.id.textView_size_clothe);
-                price = itemView.findViewById(R.id.textView_price_clothe);
-            } else {
-                name = itemView.findViewById(R.id.textView_name_clothe_menu);
-            }
+            iconImage = itemView.findViewById(R.id.imageView_clothe_menu);
+            name = itemView.findViewById(R.id.textView_name_clothe_menu);
         }
 
         public void bind(Producto producto, final OnItemClickListener listener) {
-            byte[] data = null;
-            try {
-                data = producto.getImagen().getBytes("UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            final String base64 = Base64.encodeToString(data, Base64.DEFAULT);
-            if(data != null) {
-                Bitmap bit = BitmapFactory.decodeByteArray(data, 0, data.length);
-                iconImage.setImageBitmap(bit);
+            if(producto.getImagen() != null) {
+                byte[] decodedBytes = Base64.decode(producto.getImagen(), Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+                iconImage.setImageBitmap(bitmap);
             }
 
-            if(!windowIsShop) {
-                size.setText(String.valueOf(producto.getTalla()));
-                price.setText(String.valueOf((int) producto.getPrecio()));
-            }
-
-            Type type = TypesManager.getOneType(producto.getId_tipo());
-            name.setText(type.getNombre_tipo()+" "+((type.getLongitud_tipo()!=null) ? type.getLongitud_tipo() : producto.getColor()));
+            name.setText(ClotheNameManager.setName(producto, ProductsManager.getContext()));
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -114,6 +97,10 @@ public class ListProductsShopAdapter extends RecyclerView.Adapter<ListProductsSh
                 }
             });
         }
+    }
+
+    public static List<Producto> getOriginalData() {
+        return originalData;
     }
 }
 

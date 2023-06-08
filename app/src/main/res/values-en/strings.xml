@@ -28,7 +28,6 @@
     <string name="textView_title_view_clothe">Visualise garment</string>
     <string name="textView_text_dialog_code">Insert the numbers from the barcode</string>
     <string name="button_delete_clothe">Delete</string>
-    <string name="button_take_out_clothe">Take out from warehouse</string>
     <string name="button_insert_barcode">Insert code</string>
     <string name="editText_num_barcode">Barcode</string>
     <string name="message_delete_clothe">Deleted garment</string>
@@ -42,7 +41,7 @@
     <string name="textView_sign_up">Don\'t have an account? Register now</string>
     <string name="textView_title_telephone">Telephone</string>
     <string name="textView_title_email">Email</string>
-    <string name="editText_username">Insert your identification</string>
+    <string name="editText_username">Insert your name</string>
     <string name="editText_password">Insert your password</string>
     <string name="editText_telephone_sign_up">Insert your number</string>
     <string name="editText_email_sign_up">Insert your email</string>
@@ -59,8 +58,44 @@
     <!-- Elementos de la ventana 'shop_window' && los filtros -->
     <string name="editText_filter_name">Insert the reference of the garment</string>
     <string name="textView_title_name_category">Category</string>
+
+    <!-- Colores de los productos para la traducción correcta -->
     <string name="black">Black</string>
     <string name="pink">Pink</string>
+    <string name="beige">Beige</string>
+    <string name="blue">Blue</string>
+    <string name="variosColours">Variety</string>
+    <string name="green">Green</string>
+    <string name="white">White</string>
+    <string name="kaki">Kaki</string>
+    <string name="metallized">Metallized</string>
+    <string name="yellow">Yellow</string>
+    <string name="noSize">Unique size</string>
+    <string name="orange">Orange</string>
+    <string name="brown">Brown</string>
+
+    <!-- Largos de los productos para la traducción correcta -->
+    <string name="large">Large</string>
+    <string name="curt">Short</string>
+    <string name="midi">Midi</string>
+    <string name="high">High</string>
+    <string name="plain">Plain</string>
+    <string name="lower">Low</string>
+    <string name="big">Big</string>
+    <string name="little">Little</string>
+
+    <!-- Tipos de productos para la traducción correcta -->
+    <string name="t_shirt">T-Shirt</string>
+    <string name="shirt">Shirt</string>
+    <string name="chaquet">Chaquet</string>
+    <string name="shoes">Shoes</string>
+    <string name="dress">Dress</string>
+    <string name="waistcoat">Chaleco</string>
+    <string name="mono">Mono</string>
+    <string name="shorts">Shorts</string>
+    <string name="swimsuit">Swimsuit</string>
+    <string name="trousers">Trousers</string>
+    <string name="bag">Bag</string>
 
     <!-- Elementos del dialog 'custom_error_dialog' && mensajes de error -->
     <string name="textView_errorTitle">Error</string>
@@ -68,19 +103,34 @@
     <string name="textView_errorDesc">Error ocurried</string>
     <string name="message_error_empty_field">There is an empty field</string>
     <string name="message_error_different_passwords">The passwords are not the same</string>
-    <string name="message_error_not_letters">Only enter letter in the id</string>
-    <string name="message_error_not_long">The lenght of the id must be of 8 characters</string>
+    <string name="already_purchase">You are already in the purchase</string>
+    <string name="already_shopping">You are already in the shop</string>
+    <string name="products_cart">Must be product in the cart</string>
+    <string name="product_not_exists">The inserted code dont exist in our database</string>
+    <string name="cant_sign_in">The provided data doesnt match with any of ours accounts</string>
+    <string name="cant_get_products">Couldnt get the products from the database</string>
 
-    <!-- Elementos del dialog 'custom_error_dialog' -->
+    <!-- Elementos del dialog 'custom_dialog_discounts' -->
     <string name="textView_title_discount">Available discounts</string>
     <string name="button_apply_discount">Apply</string>
 
+    <!-- Elementos del dialog 'custom_dialog_clothe_resume -->
     <string name="message_warehouse_cart">Product requested correctly</string>
     <string name="message_warehouse_take_out">Product added to the cart correctly</string>
     <string name="button_add_cart">Add to cart</string>
+    <string name="button_take_out_clothe">Take out from warehouse</string>
+
+    <!-- Elementos del window "PayWindow" -->
     <string name="button_final_pay">Finish shop</string>
     <string name="textView_final_resume">Summary of purchase</string>
     <string name="textView_percent_tax">Percent VAT</string>
     <string name="textView_percent_discounts">Percent discounts</string>
     <string name="textView_total_amount">TOTAL AMOUNT</string>
+
+    <!-- Elementos de las pantallas de administrador -->
+    <string name="textView_config_admin">Administrators configuration</string>
+    <string name="button_modify_clothe_admin">Modify product</string>
+    <string name="button_delete_clothe_admin">Delete product</string>
+    <string name="editText_hint_price">Insert new price...</string>
+    <string name="editText_hint_size">Insert new size...</string>
 </resources>

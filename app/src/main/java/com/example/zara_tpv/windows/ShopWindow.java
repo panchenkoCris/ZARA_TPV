@@ -1,7 +1,6 @@
 package com.example.zara_tpv.windows;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,7 +20,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.zara_tpv.R;
-import com.example.zara_tpv.adapter.ListProductsAdapter;
 import com.example.zara_tpv.adapter.ListProductsShopAdapter;
 import com.example.zara_tpv.manager.DialogManager;
 import com.example.zara_tpv.manager.FilterManager;
@@ -92,7 +90,7 @@ public class ShopWindow extends AppCompatActivity {
     }
 
     private void setAdapter() {
-        adapter =  new ListProductsShopAdapter(clothes, true, new ListProductsShopAdapter.OnItemClickListener() {
+        adapter =  new ListProductsShopAdapter(clothes, new ListProductsShopAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Producto item) {
                 DialogManager.openDialogClotheTakeOut(ShopWindow.this, item);
@@ -124,7 +122,7 @@ public class ShopWindow extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_dresser:
-                Toast.makeText(this, "Account", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, this.getString(R.string.already_shopping), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_account:
                 DialogManager.openDialogLogin(this);

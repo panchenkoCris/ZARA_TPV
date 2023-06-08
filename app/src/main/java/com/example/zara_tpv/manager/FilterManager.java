@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FilterManager {
-    private static List<Producto> listModified;
+    private static List<Producto> listModified = new ArrayList<>();
     /**
      * Method to create filter to spinner
      *  @param spin
@@ -39,33 +39,54 @@ public class FilterManager {
     }
 
     private static void setFilterSize(String size, ListProductsShopAdapter adapter) {
-        int talla = Integer.valueOf(size);
-        List<Producto> list = new ArrayList<>();
-        if(!listModified.isEmpty()) {
-            for (Producto item : listModified) {
-                if (item.getTalla() == talla) {
-                    list.add(item);
+        int talla = 0;
+        if(!size.equals("Talla") && !size.equals("Size")) {
+            if(!size.equals("Talla única") && !size.equals("Unique size")) {
+                talla = Integer.valueOf(size);
+            }
+
+            List<Producto> list = new ArrayList<>();
+            if (!listModified.isEmpty()) {
+                for (Producto item : listModified) {
+                    if (item.getTalla() == talla) {
+                        list.add(item);
+                    }
+                }
+            } else {
+                for (Producto item : ProductsManager.getClothes()) {
+                    if (item.getTalla() == talla) {
+                        list.add(item);
+                    }
                 }
             }
+            listModified = list;
+            adapter.setFilteredList(list);
         } else {
-            for (Producto item : ProductsManager.getClothes()) {
-                if (item.getTalla() == talla) {
-                    list.add(item);
-                }
-            }
+            adapter.setFilteredList(ListProductsShopAdapter.getOriginalData());
         }
-        adapter.setFilteredList(list);
     }
 
     private static void setFilterColor(String color, ListProductsShopAdapter adapter) {
         List<Producto> list = new ArrayList<>();
-        for (Producto item : ProductsManager.getClothes()) {
-            if (item.getColor().equals(color)) {
-                list.add(item);
+        if(!color.equals("Color")) {
+            if (!listModified.isEmpty()) {
+                for (Producto item : listModified) {
+                    if (item.getColor().equals(color)) {
+                        list.add(item);
+                    }
+                }
+            } else {
+                for (Producto item : ProductsManager.getClothes()) {
+                    if (item.getColor().equals(color)) {
+                        list.add(item);
+                    }
+                }
             }
+            listModified = list;
+            adapter.setFilteredList(list);
+        } else {
+            adapter.setFilteredList(ListProductsShopAdapter.getOriginalData());
         }
-        listModified = list;
-        adapter.setFilteredList(list);
     }
 
     /**
@@ -87,4 +108,16 @@ public class FilterManager {
     }
 
 
+    public static void setFilterReferenceAdmin(String nameClothe, ListProductsShopAdapter adapter) {
+        List<Producto> listFiltered = new ArrayList<>();
+        for (Producto item : ProductsManager.getClothesAdmin()) {
+            if (item.getCb_producto() == Integer.valueOf(nameClothe)) {
+                listFiltered.add(item);
+            }
+        }
+
+        if(!listFiltered.isEmpty()) {
+            adapter.setFilteredList(listFiltered);
+        }
+    }
 }

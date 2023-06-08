@@ -14,7 +14,7 @@ public class Usuarios {
     @SerializedName("rol")
     private String rol;
 
-    public Usuarios(int id_usuario, String nombre, String correo, String contraseña, String rol) {
+    public Usuarios(String nombre, String correo, String contraseña, String rol) {
         this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.correo = correo;
