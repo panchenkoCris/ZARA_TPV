@@ -207,7 +207,7 @@ public class DialogManager {
 
         buttonDeleteClothe.setOnClickListener((v) -> {
             adapter.removeItem(clothe);
-            PayWindow.setDiscountAmount(clothe.getPrecio());
+            //PayWindow.setDiscountAmount(clothe.getPrecio());
             Toast.makeText(context, context.getString(R.string.message_delete_clothe), Toast.LENGTH_SHORT).show();
             dialog.dismiss();
         });

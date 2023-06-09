@@ -45,7 +45,7 @@ public class ProductsManager {
 
             @Override
             public void onFailure(Call<List<Producto>> call, Throwable t) {
-                DialogManager.openDialogError(context, t.getLocalizedMessage());
+                DialogManager.openDialogError(context, context.getString(R.string.cant_get_products));
             }
         });
     }

@@ -11,6 +11,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -112,11 +114,7 @@ public class PayWindow extends AppCompatActivity {
     }
 
     public static void setDiscountAmount(double totalDiscount) {
-        if(productoList.isEmpty()) {
-            totalAmount = 0.0;
-        } else {
-            totalAmount -= totalDiscount;
-        }
+        totalAmount -= totalDiscount;
         editAmount.setText(String.format("%.2f", totalAmount));
     }
 
@@ -154,6 +152,30 @@ public class PayWindow extends AppCompatActivity {
                 setValueAmount();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.general_options_app, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_dresser:
+                startActivity(new Intent(this, ShopWindow.class));
+                break;
+            case R.id.action_account:
+                DialogManager.openDialogLogin(this);
+                break;
+            case R.id.action_shopping:
+                Toast.makeText(this, this.getString(R.string.already_purchase), Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return false;
     }
 
     private void getPayment() {
